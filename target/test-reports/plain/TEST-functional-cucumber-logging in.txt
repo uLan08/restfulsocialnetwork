@@ -1,0 +1,16 @@
+Testsuite: logging in
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.878 sec
+------------- Standard Output ---------------
+Feature: logging in
+
+--Output from Logging in--
+  Scenario: Logging in                                                                       # Login.feature:3
+    Given I am at the url "http://localhost:8090/restsocnet/login/auth"                      # Login_steps.groovy:8
+    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
+    Then I should be able to view the home page for logged in users                          # Login_steps.groovy:16
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+
+--Output from Logging in--------------- ---------------- ---------------
+
+Testcase: Logging in took 1.752 sec
