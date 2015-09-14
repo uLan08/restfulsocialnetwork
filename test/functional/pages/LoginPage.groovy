@@ -3,7 +3,7 @@ package pages
 import geb.Page
 
 class LoginPage extends Page{
-     static url = "login/auth"
+     static url = "http://localhost:8090/restsocnet/login/auth"
 
      static at = {
         title ==~/Login/

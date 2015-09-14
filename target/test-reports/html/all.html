@@ -41,19 +41,19 @@
 <div class="clear"></div>
 <div class="testsuite success">
 <div class="header">
-<h2>logging in</h2>
+<h2>List Posts</h2>
 <h3>
                         A single test executed
                     
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="Logging in">
+<div class="testcase clearfix success grid_8 alpha omega" data-name="See all posts">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">Logging in</b>
+<span class="icon success"></span><b class="testname message success">See all posts</b>
 </p>
-<p class="summary">Executed in 1.751 seconds.</p>
+<p class="summary">Executed in 2.174 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -61,19 +61,19 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">Feature: logging in
+<pre class="stdout">Feature: List Posts
 
---Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:3
-    Given I am at the url "http://localhost:8090/restsocnet/login/auth"                      # Login_steps.groovy:8
-    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
-    Then I should be able to view the home page for logged in users                          # Login_steps.groovy:16
+--Output from See all posts--
+  Scenario: See all posts           # ListPost.feature:3
+    Given I am logged in            # ListPost_steps.groovy:6
+    When I go to the posts page     # ListPost_steps.groovy:16
+    Then I should see all the posts # ListPost_steps.groovy:19
 </pre>
 </div>
 <div class="syserr">
 <h2>System error</h2>
 <pre class="syserr">
---Output from Logging in--</pre>
+--Output from See all posts--</pre>
 </div>
 </div>
 <div class="clear"></div>

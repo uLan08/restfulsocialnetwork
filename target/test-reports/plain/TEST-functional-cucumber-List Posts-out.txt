@@ -1,0 +1,7 @@
+Feature: List Posts
+
+--Output from See all posts--
+  Scenario: See all posts           # ListPost.feature:3
+    Given I am logged in            # ListPost_steps.groovy:6
+    When I go to the posts page     # ListPost_steps.groovy:16
+    Then I should see all the posts # ListPost_steps.groovy:19

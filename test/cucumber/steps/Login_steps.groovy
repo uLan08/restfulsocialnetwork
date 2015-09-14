@@ -5,8 +5,8 @@ import pages.*
 //transient springSecurityService
 
 
-Given(~/^I am at the url "([^"]*)"$/) { String arg1 ->
-    go arg1
+Given(~/^I am at the login page$/) { ->
+    to LoginPage
     at LoginPage
 
 }
@@ -17,7 +17,8 @@ Then(~/^I should be able to view the home page for logged in users$/) { ->
 //    def springSecurityService = appCtx.getBean("springSecurityService")
 //
 //    assert springSecurityService.isLoggedIn() == true
-
-    at LoggedInHomePage
+    at HomePage
+    assert page.isLoggedIn() == true
+//    assert  $("div", name: "greet").text() == "You are Logged in"
 
 }
