@@ -118,21 +118,67 @@ log4j.main = {
 
 
 // Added by the Spring Security Core plugin:
+//grails.plugin.springsecurity.active = false
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.patrickjuen.restsocnet.User'
-grails.plugin.springsecurity.logout.postOnly = false
+//grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.patrickjuen.restsocnet.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.patrickjuen.restsocnet.Role'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
-	'/assets/**':       ['permitAll'],
-	'/**/js/**':        ['permitAll'],
-	'/**/css/**':       ['permitAll'],
-	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll'],
-    '/dbconsole/**':    ['permitAll'],
-    '/index.html':      ['permitAll'],
-    '/bower_components**': ['permitAll']
+//grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+//	'/':                ['permitAll'],
+//	'/index':           ['permitAll'],
+//	'/index.gsp':       ['permitAll'],
+//	'/assets/**':       ['permitAll'],
+//	'/**/js/**':        ['permitAll'],
+//	'/**/css/**':       ['permitAll'],
+//	'/**/images/**':    ['permitAll'],
+//	'/**/favicon.ico':  ['permitAll'],
+//    '/dbconsole/**':    ['permitAll'],
+//    '/index.html':      ['permitAll'],
+//    '/bower_components/**': ['permitAll'],
+//    '/home': ['ROLE_USER']
+//]
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.interceptUrlMap = [
+        '/':                ['permitAll'],
+        '/index':           ['permitAll'],
+        '/index.gsp':       ['permitAll'],
+        '/assets/**':       ['permitAll'],
+        '/**/js/**':        ['permitAll'],
+        '/**/css/**':       ['permitAll'],
+        '/**/images/**':    ['permitAll'],
+        '/**/favicon.ico':  ['permitAll'],
+        '/dbconsole/**':    ['permitAll'],
+        '/index.html':      ['permitAll'],
+        '/bower_components/**': ['permitAll'],
+        '/login':           ['permitAll'],
+        '/home':            ['permitAll'],
+        '/app.js':          ['permitAll'],
+        '/partials/**':     ['permitAll'],
+        '/api/login':       ['permitAll'],
+        '/api/logout':      ['permitAll'],
+        '/api/validate':    ['permitAll'],
+        '/**':            ['isFullyAuthenticated()']
+
 ]
+grails.plugin.springsecurity.filterChain.chainMap = [
+//        '/auth/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter, -rememberMeAuthenticationFilter', // Stateless chain
+        '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
+        '/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
+]
+grails.plugin.springsecurity.rest.login.active=true
+grails.plugin.springsecurity.rest.login.endpointUrl='/api/login'
+grails.plugin.springsecurity.rest.login.failureStatusCode=401
+grails.plugin.springsecurity.rest.login.useJsonCredentials=true
+grails.plugin.springsecurity.rest.login.usernamePropertyName='username'
+grails.plugin.springsecurity.rest.login.passwordPropertyName='password'
+grails.plugin.springsecurity.rest.logout.endpointUrl='/api/logout'
+grails.plugin.springsecurity.rest.token.generation.useSecureRandom=true
+//grails.plugin.springsecurity.rest.token.validation.headerName='X-Auth-Token'
+grails.plugin.springsecurity.rest.token.generation.useUUID=false
+grails.plugin.springsecurity.rest.token.validation.active=true
+grails.plugin.springsecurity.rest.token.validation.endpointUrl='/api/validate'
+grails.plugin.springsecurity.rest.token.storage.useJwt=true
+grails.plugin.springsecurity.rest.token.storage.jwt.useSignedJwt=true
+grails.plugin.springsecurity.rest.token.storage.jwt.secret='qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
+grails.plugin.springsecurity.rest.token.storage.jwt.expiration=3600
 

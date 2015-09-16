@@ -4,42 +4,48 @@
     <meta charset="UTF-8">
     <title>Simple Social Network</title>
 
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
+    <script src="app.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body ng-app="restsocnet">
+    <base href="/restsocnet/" />
+
     <nav class="navber navbar-inverse navbar-static-top" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Simple Social Network</a>
+            <a class="navbar-brand" ui-sref="posts">Simple Social Network</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Profile</a>
+                    <a ui-sref="profile">Profile</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle margin-left" data-toggle="dropdown"><strong class="glyphicon glyphicon-user"></strong>User</a>
-                    <ul class="dropdown-menu">
-
-                        <li>
-                            <a href="#">Logout</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a ui-sref="login" class="dropdown-toggle margin-left" data-toggle="dropdown"><strong class="glyphicon glyphicon-user"></strong>Login</a>
+                </li>
+                <li>
+                    <a ui-sref="logout">Logout</a>
                 </li>
 
             </ul>
         </div>
     </nav>
+
+    <div class="container">
+        <div ui-view></div>
+    </div>
 
 
 </body>
