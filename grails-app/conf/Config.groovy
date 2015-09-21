@@ -123,22 +123,7 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.patrickjuen.r
 //grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.patrickjuen.restsocnet.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.patrickjuen.restsocnet.Role'
-//grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-//	'/':                ['permitAll'],
-//	'/index':           ['permitAll'],
-//	'/index.gsp':       ['permitAll'],
-//	'/assets/**':       ['permitAll'],
-//	'/**/js/**':        ['permitAll'],
-//	'/**/css/**':       ['permitAll'],
-//	'/**/images/**':    ['permitAll'],
-//	'/**/favicon.ico':  ['permitAll'],
-//    '/dbconsole/**':    ['permitAll'],
-//    '/index.html':      ['permitAll'],
-//    '/bower_components/**': ['permitAll'],
-//    '/home': ['ROLE_USER']
-//]
-grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
-grails.plugin.springsecurity.interceptUrlMap = [
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/':                ['permitAll'],
         '/index':           ['permitAll'],
         '/index.gsp':       ['permitAll'],
@@ -157,9 +142,34 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/api/login':       ['permitAll'],
         '/api/logout':      ['permitAll'],
         '/api/validate':    ['permitAll'],
+        '/register':        ['permitAll'],
         '/**':            ['isFullyAuthenticated()']
-
 ]
+//grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+//grails.plugin.springsecurity.interceptUrlMap = [
+//        '/':                ['permitAll'],
+//        '/index':           ['permitAll'],
+//        '/index.gsp':       ['permitAll'],
+//        '/assets/**':       ['permitAll'],
+//        '/**/js/**':        ['permitAll'],
+//        '/**/css/**':       ['permitAll'],
+//        '/**/images/**':    ['permitAll'],
+//        '/**/favicon.ico':  ['permitAll'],
+//        '/dbconsole/**':    ['permitAll'],
+//        '/index.html':      ['permitAll'],
+//        '/bower_components/**': ['permitAll'],
+//        '/login':           ['permitAll'],
+//        '/home':            ['permitAll'],
+//        '/app.js':          ['permitAll'],
+//        '/partials/**':     ['permitAll'],
+//        '/api/login':       ['permitAll'],
+//        '/api/logout':      ['permitAll'],
+//        '/api/validate':    ['permitAll'],
+//        '/api/users':       ['permitAll'],
+//        '/register':        ['permitAll'],
+//        '/**':            ['isFullyAuthenticated()']
+//
+//]
 grails.plugin.springsecurity.filterChain.chainMap = [
 //        '/auth/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter, -rememberMeAuthenticationFilter', // Stateless chain
         '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain

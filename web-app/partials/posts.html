@@ -1,3 +1,24 @@
-<div ng-repeat="post in posts">
-    {{post.content}}
+<div class="col-md-12">
+    <div class="row">
+        <div>
+            <textarea class="form-control" rows="5" ng-model="newPost.content">
+            </textarea>
+        </div>
+
+        <div class="pull-right">
+            <button class="btn btn-primary" ng-click="postStatus()">
+                Post
+            </button>
+        </div>
+
+    </div>
+    <div class="row" ng-repeat="post in posts">
+        <div>
+           <a href="#">{{users[$index].username}}</a> at {{post.dateCreated | date: 'MMM dd, yyyy HH:mm'}}
+        </div>
+        <div>
+            {{post.content}}
+        </div>
+        <hr>
+    </div>
 </div>
