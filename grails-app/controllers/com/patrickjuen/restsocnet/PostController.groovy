@@ -16,16 +16,18 @@ class PostController {
     def springSecurityService
 
     def index() {
-        render Post.list(sort: "dateCreated", order: "asc") as JSON
+        render Post.list(sort: "dateCreated", order: "desc") as JSON
     }
 
     def save(){
         def newPost = new Post(request.JSON)
         if(!newPost.hasErrors()){
-            newPost.save()
             def currentUser = User.get(springSecurityService.principal.id)
             println currentUser
-            currentUser.addToPosts(newPost)
+            newPost.user = currentUser
+            newPost.save(failOnError: true)
+
+//            currentUser.addToPosts(newPost)
             render (['success': true] as JSON)
         }
     }

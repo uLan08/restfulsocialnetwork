@@ -13,11 +13,14 @@ class BootStrap {
 
         def post1 = new Post(content: "new post number 1")
         def post2 = new Post(content: "new post number 2")
+        def post3 = new Post(content: "isa pa gd ")
         post1.save()
         post2.save()
+        post3.save()
 
         user1.addToPosts(post1)
         user1.addToPosts(post2)
+        user1.addToPosts(post3)
 
         UserRole.create(user1, role, true)
     }

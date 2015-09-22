@@ -135,14 +135,14 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/dbconsole/**':    ['permitAll'],
         '/index.html':      ['permitAll'],
         '/bower_components/**': ['permitAll'],
-        '/login':           ['permitAll'],
-        '/home':            ['permitAll'],
+//        '/login':           ['permitAll'],
+//        '/home':            ['permitAll'],
         '/app.js':          ['permitAll'],
         '/partials/**':     ['permitAll'],
         '/api/login':       ['permitAll'],
         '/api/logout':      ['permitAll'],
         '/api/validate':    ['permitAll'],
-        '/register':        ['permitAll'],
+//        '/register':        ['permitAll'],
         '/**':            ['isFullyAuthenticated()']
 ]
 //grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
