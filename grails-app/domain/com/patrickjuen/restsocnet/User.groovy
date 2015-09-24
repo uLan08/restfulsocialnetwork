@@ -12,7 +12,9 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	static hasMany = [posts: Post]
+	static hasMany = [posts: Post, likedPost: Post]
+    static mappedBy = [posts: "user"]
+
 
 	User(String username, String password) {
 		this()
@@ -58,11 +60,12 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        likedPost nullable: true
 	}
 
 	static mapping = {
 		password column: '`password`'
-		posts lazy: false
+		posts lazy: false, sort: 'dateCreated', order: 'desc'
 
 	}
 }

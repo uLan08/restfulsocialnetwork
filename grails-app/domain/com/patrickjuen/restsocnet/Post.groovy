@@ -4,7 +4,11 @@ class Post {
 
     String content
     Date dateCreated
-    static belongsTo = [user: User]
+    User user
+    static belongsTo = User
+    static hasMany = [likers: User]
+//    static mappedBy = [likers: "likedPost"]
     static constraints = {
+        likers nullable: true
     }
 }

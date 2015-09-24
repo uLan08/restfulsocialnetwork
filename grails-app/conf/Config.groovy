@@ -137,13 +137,13 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/bower_components/**': ['permitAll'],
 //        '/login':           ['permitAll'],
 //        '/home':            ['permitAll'],
+//        '/register':        ['permitAll'],
         '/app.js':          ['permitAll'],
         '/partials/**':     ['permitAll'],
         '/api/login':       ['permitAll'],
         '/api/logout':      ['permitAll'],
         '/api/validate':    ['permitAll'],
-//        '/register':        ['permitAll'],
-        '/**':            ['isFullyAuthenticated()']
+//        '/**':            ['isFullyAuthenticated()']
 ]
 //grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 //grails.plugin.springsecurity.interceptUrlMap = [
@@ -165,7 +165,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 //        '/api/login':       ['permitAll'],
 //        '/api/logout':      ['permitAll'],
 //        '/api/validate':    ['permitAll'],
-//        '/api/users':       ['permitAll'],
+////        '/api/users':       ['permitAll'],
 //        '/register':        ['permitAll'],
 //        '/**':            ['isFullyAuthenticated()']
 //
@@ -173,7 +173,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 grails.plugin.springsecurity.filterChain.chainMap = [
 //        '/auth/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter, -rememberMeAuthenticationFilter', // Stateless chain
         '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
-        '/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
+//        '/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
+//        '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'
 ]
 grails.plugin.springsecurity.rest.login.active=true
 grails.plugin.springsecurity.rest.login.endpointUrl='/api/login'
@@ -183,7 +184,7 @@ grails.plugin.springsecurity.rest.login.usernamePropertyName='username'
 grails.plugin.springsecurity.rest.login.passwordPropertyName='password'
 grails.plugin.springsecurity.rest.logout.endpointUrl='/api/logout'
 grails.plugin.springsecurity.rest.token.generation.useSecureRandom=true
-//grails.plugin.springsecurity.rest.token.validation.headerName='X-Auth-Token'
+grails.plugin.springsecurity.rest.token.validation.headerName='X-Auth-Token'
 grails.plugin.springsecurity.rest.token.generation.useUUID=false
 grails.plugin.springsecurity.rest.token.validation.active=true
 grails.plugin.springsecurity.rest.token.validation.endpointUrl='/api/validate'

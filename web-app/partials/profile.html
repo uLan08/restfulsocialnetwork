@@ -1,3 +1,26 @@
-<div>
-    {{temp}}
+<h1>{{user.username}}</h1>
+<hr>
+<div class="col-md-12">
+    <div class="row" ng-show="isCurrentUser">
+        <div>
+            <textarea class="form-control" rows="5" ng-model="newPost.content">
+            </textarea>
+        </div>
+
+        <div class="pull-right">
+            <button class="btn btn-primary" ng-click="postStatus()">
+                Post
+            </button>
+        </div>
+
+    </div>
+    <div class="row" ng-repeat="post in user.posts">
+        <div>
+            <a ui-sref="profile({id: post.user.id})">{{user.username}}</a> at {{post.dateCreated | date: 'MMM dd, yyyy HH:mm'}}
+        </div>
+        <div>
+            {{post.content}}
+        </div>
+        <hr>
+    </div>
 </div>

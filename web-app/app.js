@@ -42,10 +42,16 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 }
             })
             .state("profile", {
-                url: "/profile",
+                url: "/profile/:id",
                 templateUrl: 'partials/profile.html',
+                resolve: {
+                    User: 'User',
+                    user: ['User', '$stateParams', function(User, $stateParams){
+                        return User.get({userId: $stateParams.id}).$promise
+                    }]
+                },
                 data: {
-                    requiresLogin: false
+                    requiresLogin: true
                 },
                 controller: 'ProfileController'
             })
@@ -94,31 +100,76 @@ app.factory('User', ['$resource', function ($resource) {
         })
 }])
 
+//function reloadPosts(Post){
+//    return Post.query()
+//}
 
-app.controller('PostController', ['$scope', 'posts', 'User', 'Post', function ($scope, posts, User, Post) {
-    //$scope.sum = 10
-    //console.log(posts)
-    $scope.posts = posts
-    $scope.users = []
+app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
-    for (var i = 0; i < $scope.posts.length; i++) {
-        $scope.users[i] = User.get({userId: $scope.posts[i].user.id})
+    $scope.user = user
+    //$scope.userPosts = $scope.user.posts
+    //$scope.load()
+    if($scope.user.username === store.get('username')){
+        $scope.isCurrentUser = true;
     }
 
     $scope.postStatus = function () {
         console.log($scope.newPost)
-        //var newPost = new Post()
-        //newPost.content = $scope.newPost.content
-        //newPost.$save()
         Post.save($scope.newPost,
             function (result) {
                 $scope.newPost = {}
+                $scope.user = User.get({userId: $stateParams.id})
+                //$scope.userPosts = $scope.user.posts
+                console.log($scope.user)
+                console.log(result.success)
+            },
+            function (error) {
+                console.log(error)
+            })
+
+    }
+
+
+}])
+
+app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', function ($scope, posts, User, Post, $interval) {
+    //$scope.sum = 10
+    //console.log(posts)
+    $scope.posts = posts
+    $scope.newPost = {}
+
+    $scope.postStatus = function () {
+        Post.save($scope.newPost,
+            function (result) {
+                $scope.newPost = {}
+                $scope.posts = Post.query()
                 console.log(result.success)
             },
             function (error) {
                 console.log(error)
             })
     }
+
+    $scope.like = function(id){
+        var currentPost = Post.get({postId: id})
+        console.log(currentPost)
+        //$scope.likedPost = {}
+        //$scope.likedPost.content = currentPost.content
+        //$scope.likedPost.dateCreated = currentPost.dateCreated
+        //$scope.likedPost.id = currentPost.id
+        //$scope.likedPost.likers = currentPost.likers
+        //$scope.likedPost.user = currentPost.user
+        //console.log($scope.likedPost)
+        //Post.update({postId: id},currentPost,function(response){
+        //    console.log(response)
+        //}, function(response){
+        //    console.log(response)
+        //})
+    }
+
+    $interval(function () {
+        $scope.posts = Post.query()
+    }, 5000)
 }])
 
 app.controller('UserController', ['$scope', 'User', '$state', function ($scope, User, $state) {
@@ -135,12 +186,11 @@ app.controller('UserController', ['$scope', 'User', '$state', function ($scope, 
     }
 }])
 
-app.controller('ProfileController', ['$scope', function ($scope) {
-    $scope.temp = 'profile mo ni to!'
-}])
+
 
 app.controller('LogoutController', ['store', '$state', function (store, $state) {
     store.remove('jwt')
+    store.remove('username')
     $state.go('login')
     console.log(store.get('jwt'))
 }])
@@ -156,6 +206,7 @@ app.controller('LoginController', ['$scope', 'Login', 'store', '$state', functio
             function (success) {
                 console.log(success)
                 store.set('jwt', success.access_token)
+                store.set('username', success.username)
                 $state.go('posts')
             }, function (error) {
                 $scope.user = {}
