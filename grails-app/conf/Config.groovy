@@ -193,3 +193,6 @@ grails.plugin.springsecurity.rest.token.storage.jwt.useSignedJwt=true
 grails.plugin.springsecurity.rest.token.storage.jwt.secret='qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
 grails.plugin.springsecurity.rest.token.storage.jwt.expiration=3600
 
+
+
+grails.converters.gson.serializeNulls=true

@@ -6,6 +6,9 @@ import com.patrickjuen.restsocnet.Post
 import com.patrickjuen.restsocnet.Role
 import com.patrickjuen.restsocnet.User
 import com.patrickjuen.restsocnet.UserRole
+import grails.plugin.gson.converters.GSON
+
+
 
 
 

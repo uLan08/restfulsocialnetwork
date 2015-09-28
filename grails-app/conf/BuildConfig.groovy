@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
-
+        mavenRepo "http://repo.grails.org/grails/core"
         grailsPlugins()
         grailsHome()
         mavenLocal()
@@ -58,6 +58,8 @@ grails.project.dependency.resolution = {
         test ("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
         test ("org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion")
         test "org.gebish:geb-spock:$gebVersion"
+        compile "commons-beanutils:commons-beanutils:1.9.2"
+
     }
 
     plugins {
@@ -72,6 +74,7 @@ grails.project.dependency.resolution = {
         compile ':spring-security-rest:1.5.2', {
             excludes: 'spring-security-core'
         }
+        compile 'org.grails.plugins:gson:1.1.4'
 
 
         // plugins needed at runtime but not for compilation

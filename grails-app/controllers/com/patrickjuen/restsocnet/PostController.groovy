@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 //import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.security.access.annotation.Secured
-import com.patrickjuen.restsocnet.*
+import grails.plugin.gson.converters.GSON
 
 
 @Secured(['isFullyAuthenticated()'])
@@ -34,18 +34,16 @@ class PostController {
 
     def show(){
         def post = Post.get(params.id)
-        println post.user.username
-        render post as JSON
+        render post as GSON
     }
 
     def update(){
         def post = Post.findById(params.id)
-        println post.content
-        println request.JSON
-        post.setProperties(request.JSON)
-        post.addToLikers(User.get(springSecurityService.principal.id))
-        post.save(true)
-        render(['success': true] as JSON)
-
+        if(!post.hasErrors()){
+            def currentUser = User.get(springSecurityService.principal.id)
+            post.addToLikers(currentUser)
+            post.save(flush: true)
+            render(['success': true] as JSON)
+        }
     }
 }

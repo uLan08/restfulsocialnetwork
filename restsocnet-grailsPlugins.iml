@@ -18,8 +18,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
     <content url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-2.1.5">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-2.1.5/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-2.1.5/grails-app/services" isTestSource="false" />
@@ -42,6 +41,9 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/controllers" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/geb-0.12.2" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/gson-1.1.4">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/gson-1.1.4/src/groovy" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/hibernate4-4.3.8.1">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate4-4.3.8.1/src/java" isTestSource="false" />
     </content>

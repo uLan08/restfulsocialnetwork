@@ -12,7 +12,7 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	static hasMany = [posts: Post, likedPost: Post]
+	static hasMany = [posts: Post, likedPost: Post, followedUsers: User]
     static mappedBy = [posts: "user"]
 
 
@@ -66,6 +66,7 @@ class User implements Serializable {
 	static mapping = {
 		password column: '`password`'
 		posts lazy: false, sort: 'dateCreated', order: 'desc'
+//		likedPost lazy: false
 
 	}
 }

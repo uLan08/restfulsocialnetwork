@@ -107,6 +107,7 @@ app.factory('User', ['$resource', function ($resource) {
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
     $scope.user = user
+    console.log($scope.user.followedUsers)
     //$scope.userPosts = $scope.user.posts
     //$scope.load()
     if($scope.user.username === store.get('username')){
@@ -150,9 +151,22 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
             })
     }
 
-    $scope.like = function(id){
-        var currentPost = Post.get({postId: id})
-        console.log(currentPost)
+    $scope.like = function(postid){
+        var index;
+        for(var i = 0; i < $scope.posts.length; i++ ){
+            if($scope.posts[i].id === postid){
+                index = i;
+            }
+        }
+        var currentPost = Post.get({postId: postid})
+        //currentPost.id = postid
+        currentPost.content = "islan gamay"
+        //currentPost.dateCreated = $scope.posts[index].dateCreated
+        ////currentPost.user = $scope.posts[index].user
+        ////currentPost.likers = $scope.posts[index].likers
+        //console.log(currentPost.dateCreated)
+        //console.log($scope.posts[index].dateCreated)
+        //Post.update({postId: postid})
         //$scope.likedPost = {}
         //$scope.likedPost.content = currentPost.content
         //$scope.likedPost.dateCreated = currentPost.dateCreated
@@ -160,16 +174,16 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         //$scope.likedPost.likers = currentPost.likers
         //$scope.likedPost.user = currentPost.user
         //console.log($scope.likedPost)
-        //Post.update({postId: id},currentPost,function(response){
-        //    console.log(response)
-        //}, function(response){
-        //    console.log(response)
-        //})
+        Post.update({postId: postid}, currentPost, function(response){
+            console.log(response)
+        }, function(response){
+            console.log(response)
+        })
     }
-
-    $interval(function () {
-        $scope.posts = Post.query()
-    }, 5000)
+    //
+    //$interval(function () {
+    //    $scope.posts = Post.query()
+    //}, 5000)
 }])
 
 app.controller('UserController', ['$scope', 'User', '$state', function ($scope, User, $state) {

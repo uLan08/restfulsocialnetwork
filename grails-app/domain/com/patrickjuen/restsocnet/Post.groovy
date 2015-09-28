@@ -11,4 +11,7 @@ class Post {
     static constraints = {
         likers nullable: true
     }
+    static mapping = {
+//        likers lazy: false
+    }
 }
