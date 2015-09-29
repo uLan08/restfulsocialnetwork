@@ -13,8 +13,8 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 	static hasMany = [posts: Post, likedPost: Post, followedUsers: User]
-    static mappedBy = [posts: "user"]
-
+    static mappedBy = [posts: "user", followedUsers: "followedUsers"]
+    
 
 	User(String username, String password) {
 		this()
@@ -67,6 +67,8 @@ class User implements Serializable {
 		password column: '`password`'
 		posts lazy: false, sort: 'dateCreated', order: 'desc'
 //		likedPost lazy: false
+		// followedUsers column:'User_Followed_Id', joinTable: 'USER_USER', index: 'Follower_Id'
+		// follower column: 'Follower_Id', joinTable: 'USER_USER', index: 'User_Followed_Id'
 
 	}
 }

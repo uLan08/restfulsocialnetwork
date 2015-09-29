@@ -34,7 +34,7 @@ class PostController {
 
     def show(){
         def post = Post.get(params.id)
-        render post as GSON
+        render post as JSON
     }
 
     def update(){

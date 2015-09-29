@@ -107,7 +107,7 @@ app.factory('User', ['$resource', function ($resource) {
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
     $scope.user = user
-    console.log($scope.user.followedUsers)
+    console.log($scope.user)
     //$scope.userPosts = $scope.user.posts
     //$scope.load()
     if($scope.user.username === store.get('username')){
