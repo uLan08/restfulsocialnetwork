@@ -1,4 +1,13 @@
-<div class="col-md-12">
+<div class="col-md-2">
+    <div class="row">
+        <h3>Other Users:</h3>
+        <ul ng-repeat="user in users">
+            <a ui-sref="profile({id: user.id})"><li ng-hide="user.isCurrentUser()">{{user.username}}</li></a>
+            <button classs="btn-small btn-primary" ng-click="follow(user.id)">Follow</button>
+        </ul>
+    </div>
+</div>
+<div class="col-md-10">
     <div class="row">
         <div>
             <textarea class="form-control" rows="5" ng-model="newPost.content">

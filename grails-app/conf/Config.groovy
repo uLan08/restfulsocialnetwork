@@ -116,6 +116,7 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 
+grails.converters.json.circular.reference.behaviour = "INSERT_NULL"
 
 // Added by the Spring Security Core plugin:
 //grails.plugin.springsecurity.active = false

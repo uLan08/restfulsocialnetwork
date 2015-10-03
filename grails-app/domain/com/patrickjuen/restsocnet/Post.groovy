@@ -12,6 +12,7 @@ class Post {
         likers nullable: true
     }
     static mapping = {
-//        likers lazy: false
+        likers fetch: 'join'
+        user: lazy: false
     }
 }

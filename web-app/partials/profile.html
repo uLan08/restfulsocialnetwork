@@ -1,11 +1,20 @@
 <h1>{{user.username}}</h1>
-<strong>Following:</strong>
-<ul ng-repeat="followed in user.followedUsers">
-    <li>{{followed.username}}</li>
-</ul>
+<div class="row">
+    <strong>Followers:</strong>
+    <ul ng-repeat="follower in user.followers">
+        <a ui-sref="profile({id: follower.id})"></ag><li>{{follower.username}}</li></a>
+    </ul>
+</div>
+<div class="row">
+    <strong>Following:</strong>
+    <ul ng-repeat="followed in user.followedUsers">
+        <a ui-sref="profile({id: followed.id})"><li>{{followed.username}}</li></a>
+    </ul>
+</div>
+
 <hr>
 <div class="col-md-12">
-    <div class="row" ng-show="isCurrentUser">
+    <div class="row" ng-show="user.isCurrentUser()">
         <div>
             <textarea class="form-control" rows="5" ng-model="newPost.content">
             </textarea>

@@ -14,6 +14,7 @@ class BootStrap {
             returnArray['username'] = it.username
             returnArray['posts'] = it.posts
             returnArray['followedUsers'] = it.followedUsers
+            returnArray['followers'] = it.followers
             return returnArray
         }
         JSON.registerObjectMarshaller(Post) {
@@ -48,12 +49,17 @@ class BootStrap {
         user1.addToPosts(post3)
         user2.addToPosts(post4)
         user1.addToFollowedUsers(user2)
+        user2.addToFollowers(user1)
         post2.addToLikers(user2)
         post2.addToLikers(user1)
         post1.addToLikers(user1)
 
         UserRole.create(user1, role, true)
         UserRole.create(user2, role, true)
+
+        println user2.followers
+        println user1.followers
+        println user1.followedUsers
     }
     def destroy = {
     }

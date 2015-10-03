@@ -5,7 +5,7 @@ import geb.Page
 class HomePage extends Page{
     static url = "http://localhost:8090/restsocnet/"
     static at = {
-        title ==~/Welcome to Grails/
+        title ==~/Home/
     }
 
     static content = {

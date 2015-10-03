@@ -16,30 +16,34 @@ class PostController {
     def springSecurityService
 
     def index() {
+//            JSON.use('deep')
         render Post.list(sort: "dateCreated", order: "desc") as JSON
+
+
     }
 
-    def save(){
+    def save() {
         def newPost = new Post(request.JSON)
-        if(!newPost.hasErrors()){
+        if (!newPost.hasErrors()) {
             def currentUser = User.get(springSecurityService.principal.id)
             println currentUser
             newPost.user = currentUser
             newPost.save(failOnError: true)
 
 //            currentUser.addToPosts(newPost)
-            render (['success': true] as JSON)
+            render(['success': true] as JSON)
         }
     }
 
-    def show(){
+    def show() {
         def post = Post.get(params.id)
+//        JSON.use('deep')
         render post as JSON
     }
 
-    def update(){
+    def update() {
         def post = Post.findById(params.id)
-        if(!post.hasErrors()){
+        if (!post.hasErrors()) {
             def currentUser = User.get(springSecurityService.principal.id)
             post.addToLikers(currentUser)
             post.save(flush: true)

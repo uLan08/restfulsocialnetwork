@@ -14,6 +14,8 @@ import grails.plugin.gson.converters.GSON
 
 class UserController {
 
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
@@ -36,5 +38,16 @@ class UserController {
     @Secured(['isFullyAuthenticated()'])
     def show(){
         render User.get(params.id) as JSON
+    }
+
+    @Secured(['isFullyAuthenticated()'])
+    def update(){
+        def user = User.findById(params.id)
+        def currentUser = User.findById(springSecurityService.principal.id)
+        currentUser.addToFollowedUsers(user)
+        user.addToFollowers(currentUser)
+        currentUser.save(flush:true)
+        user.save(flush:true)
+        return (['success':true] as JSON)
     }
 }

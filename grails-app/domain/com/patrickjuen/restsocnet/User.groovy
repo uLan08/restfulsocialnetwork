@@ -12,8 +12,8 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	static hasMany = [posts: Post, likedPost: Post, followedUsers: User]
-    static mappedBy = [posts: "user", followedUsers: "followedUsers"]
+	static hasMany = [posts: Post, likedPost: Post, followedUsers: User, followers: User]
+    static mappedBy = [posts: "user"]
     
 
 	User(String username, String password) {
@@ -66,9 +66,15 @@ class User implements Serializable {
 	static mapping = {
 		password column: '`password`'
 		posts lazy: false, sort: 'dateCreated', order: 'desc'
-//		likedPost lazy: false
-		// followedUsers column:'User_Followed_Id', joinTable: 'USER_USER', index: 'Follower_Id'
+		likedPost fetch: 'join'
+//		 followedUsers column:'User_Followed_Id', joinTable: 'USER_USER', key: 'Follower_Id'
 		// follower column: 'Follower_Id', joinTable: 'USER_USER', index: 'User_Followed_Id'
+		followedUsers joinTable: [name: 'USER_USER', key: 'Follower_Id', column: 'User_Followed_Id'], fetch: 'join'
+		followers joinTable: [name: 'USER_USER', key: 'User_Followed_Id', column: 'Follower_Id'], fetch: 'join'
 
+	}
+
+	boolean isCurrentUser(){
+		return this.username == springSecurityService.currentUser
 	}
 }

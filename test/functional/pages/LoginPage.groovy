@@ -3,17 +3,17 @@ package pages
 import geb.Page
 
 class LoginPage extends Page{
-     static url = "http://localhost:8090/restsocnet/login/auth"
+     static url = "http://localhost:8090/restsocnet/login"
 
      static at = {
         title ==~/Login/
      }
 
      static content = {
-        txtLogin    { $("input[name=j_username]") }
-        txtPassword { $("input[name=j_password]") }
+        txtLogin    { $("input[name=username]") }
+        txtPassword { $("input[name=password]") }
 
-        btnLogin { $("input", type: "submit") }
+        btnLogin { $("button", type: "submit") }
      }
 
      def login(String name, String password){

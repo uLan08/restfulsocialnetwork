@@ -1,4 +1,4 @@
-var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt'])
+var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title'])
 
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInterceptorProvider',
@@ -19,7 +19,8 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     Post: 'Post',
                     posts: ['Post', function (Post) {
                         return Post.query().$promise
-                    }]
+                    }],
+                    $title: function() { return 'Home'}
                 },
                 data: {
                     requiresLogin: true
@@ -32,6 +33,9 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 controller: 'LoginController',
                 data: {
                     requiresLogin: false
+                },
+                resolve: {
+                    $title: function() {return "Login"}
                 }
             })
             .state("logout", {
@@ -48,6 +52,9 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     User: 'User',
                     user: ['User', '$stateParams', function(User, $stateParams){
                         return User.get({userId: $stateParams.id}).$promise
+                    }],
+                    $title: ['user', function(user){
+                        return user.username
                     }]
                 },
                 data: {
@@ -61,13 +68,19 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 controller: "UserController",
                 data: {
                     requiresLogin: false
+                },
+                resolve: {
+                    $title: function(){return "Register"}
                 }
             })
 
 
     }])
 
-app.run(['$rootScope', '$state', 'store', 'jwtHelper', function ($rootScope, $state, store, jwtHelper) {
+app.run(['$rootScope', '$state', 'store', 'jwtHelper', '$stateParams', function ($rootScope, $state, store, jwtHelper, $stateParams) {
+    $rootScope.$state = $state
+    $rootScope.$stateParams = $stateParams
+
     $rootScope.$on('$stateChangeStart', function (e, to) {
         if (to.data.requiresLogin) {
             //console.log(to.data)
@@ -136,6 +149,7 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
 app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', function ($scope, posts, User, Post, $interval) {
     //$scope.sum = 10
     //console.log(posts)
+    $scope.users = User.query()
     $scope.posts = posts
     $scope.newPost = {}
 
@@ -159,26 +173,17 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
             }
         }
         var currentPost = Post.get({postId: postid})
-        //currentPost.id = postid
-        currentPost.content = "islan gamay"
-        //currentPost.dateCreated = $scope.posts[index].dateCreated
-        ////currentPost.user = $scope.posts[index].user
-        ////currentPost.likers = $scope.posts[index].likers
-        //console.log(currentPost.dateCreated)
-        //console.log($scope.posts[index].dateCreated)
-        //Post.update({postId: postid})
-        //$scope.likedPost = {}
-        //$scope.likedPost.content = currentPost.content
-        //$scope.likedPost.dateCreated = currentPost.dateCreated
-        //$scope.likedPost.id = currentPost.id
-        //$scope.likedPost.likers = currentPost.likers
-        //$scope.likedPost.user = currentPost.user
-        //console.log($scope.likedPost)
         Post.update({postId: postid}, currentPost, function(response){
             console.log(response)
+            $scope.posts = Post.query()
         }, function(response){
             console.log(response)
         })
+    }
+
+    $scope.follow = function (userId) {
+        var userFollowed = User.get({userId: userId})
+        User.update({userId: userId}, userFollowed)
     }
     //
     //$interval(function () {
