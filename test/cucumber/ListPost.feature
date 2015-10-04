@@ -1,3 +1,4 @@
+@ignore
 Feature: List Posts
 
   Scenario: See all posts

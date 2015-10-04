@@ -3,22 +3,22 @@ package pages
 import geb.Page
 
 class HomePage extends Page{
-    static url = "http://localhost:8090/restsocnet/"
+    static url = "http://localhost:8090/restsocnet/home"
     static at = {
-        title ==~/Home/
+        waitFor {title == "Home"}
     }
 
     static content = {
-        logoutBtn { $("a", text: "grails.plugin.springsecurity.LogoutController")}
-        loginTxt { $("div", name: "greet") }
+        logoutBtn { $("a", text: "Logout")}
+        loginTxt { $("div", name: "greeting") }
     }
 
     def logout(){
         logoutBtn.click()
     }
 
-    def isLoggedIn(){
-        return loginTxt.text() == "You are Logged in"
+    def isLoggedIn(String arg){
+        return loginTxt.text() == "Welocome, " + arg
     }
 
 

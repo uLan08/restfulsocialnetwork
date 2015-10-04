@@ -1,13 +1,13 @@
-<!DOCTYPE html><html xmlns:lxslt="http://xml.apache.org/xslt" xmlns:stringutils="xalan://org.apache.tools.ant.util.StringUtils">
+<!DOCTYPE html><html xmlns:stringutils="xalan://org.apache.tools.ant.util.StringUtils" xmlns:lxslt="http://xml.apache.org/xslt">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>
                     Test - logging in</title>
-<link rel="shortcut icon" href="http://grails.org/images/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" title="Style" href="stylesheet.css">
+<link type="image/x-icon" href="http://grails.org/images/favicon.ico" rel="shortcut icon">
+<link title="Style" type="text/css" rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-<div class="container container_8" id="report">
+<div id="report" class="container container_8">
 <div class="grid_6">
 <a title="Home" href="index.html">
 <div class="grailslogo"></div>
@@ -49,7 +49,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">Logging in</b>
 </p>
-<p class="summary">Executed in 1.751 seconds.</p>
+<p class="summary">Executed in 2.359 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -61,9 +61,9 @@
 
 --Output from Logging in--
   Scenario: Logging in                                                                       # Login.feature:3
-    Given I am at the url "http://localhost:8090/restsocnet/login/auth"                      # Login_steps.groovy:8
+    Given I am at the login page                                                             # Login_steps.groovy:8
     When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
-    Then I should be able to view the home page for logged in users                          # Login_steps.groovy:16
+    Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
 </pre>
 </div>
 <div class="syserr">

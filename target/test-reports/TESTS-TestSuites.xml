@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="List Posts" package="" tests="1" time="5.143" timestamp="2015-09-14T10:22:02">
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="logging in" package="" tests="1" time="5.399" timestamp="2015-10-04T10:24:08">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="2.174" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.359" />
 
-      <system-out><![CDATA[Feature: List Posts
+      <system-out><![CDATA[Feature: logging in
 
---Output from See all posts--
-  Scenario: See all posts           # ListPost.feature:3
-    Given I am logged in            # ListPost_steps.groovy:6
-    When I go to the posts page     # ListPost_steps.groovy:16
-    Then I should see all the posts # ListPost_steps.groovy:19
+--Output from Logging in--
+  Scenario: Logging in                                                                       # Login.feature:3
+    Given I am at the login page                                                             # Login_steps.groovy:8
+    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
+    Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
 ]]></system-out>
 
       <system-err><![CDATA[
---Output from See all posts--]]></system-err>
+--Output from Logging in--]]></system-err>
 
   </testsuite>
 </testsuites>

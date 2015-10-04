@@ -146,12 +146,13 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
 
 }])
 
-app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', function ($scope, posts, User, Post, $interval) {
+app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', 'store', function ($scope, posts, User, Post, $interval, store) {
     //$scope.sum = 10
     //console.log(posts)
     $scope.users = User.query()
     $scope.posts = posts
     $scope.newPost = {}
+    $scope.currentUser = store.get('username')
 
     $scope.postStatus = function () {
         Post.save($scope.newPost,
