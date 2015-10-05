@@ -11,6 +11,14 @@ class HomePage extends Page{
     static content = {
         logoutBtn { $("a", text: "Logout")}
         loginTxt { $("div", name: "greeting") }
+        textArea { $("textarea") }
+        likeBtn { $("button") }
+
+
+    }
+
+    def like(){
+
     }
 
     def logout(){

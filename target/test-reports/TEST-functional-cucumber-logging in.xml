@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="logging in" tests="1" time="5.399" timestamp="2015-10-04T10:24:08">
+<testsuite errors="0" failures="0" hostname="Shadow" name="logging in" tests="1" time="7.004" timestamp="2015-10-05T06:25:07">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.359" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.65" />
   <system-out><![CDATA[Feature: logging in
 
 --Output from Logging in--

@@ -7,7 +7,7 @@ import geb.Page
  */
 class PostPage extends Page{
 
-    static url = "http://localhost:8090/restsocnet/post/index"
+    static url = "http://localhost:8090/restsocnet/"
 
     static at = {
 

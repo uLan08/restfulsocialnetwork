@@ -2,7 +2,7 @@
     <div class="row">
         <h3>Other Users:</h3>
         <ul ng-repeat="user in users">
-            <a ui-sref="profile({id: user.id})"><li ng-hide="user.isCurrentUser()">{{user.username}}</li></a>
+            <a ui-sref="profile({id: user.id})"><li ng-hide="isCurrentUser(user.username)">{{user.username}}</li></a>
             <button classs="btn-small btn-primary" ng-click="follow(user.id)">Follow</button>
         </ul>
     </div>
@@ -31,7 +31,7 @@
             {{post.content}}
         </div>
         <div><button class="btn btn-primary" ng-click="like(post.id)">+Like</button></div>
-        <div ng-show="post.likers.length" >
+        <div ng-show="post.likers.length" name="likers">
             <small ng-repeat="liker in post.likers" >
 
                 <a ui-sref="profile({id:liker.id})" ng-if="!$last">{{liker.username}}, </a>

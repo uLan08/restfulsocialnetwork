@@ -73,8 +73,6 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     $title: function(){return "Register"}
                 }
             })
-
-
     }])
 
 app.run(['$rootScope', '$state', 'store', 'jwtHelper', '$stateParams', function ($rootScope, $state, store, jwtHelper, $stateParams) {
@@ -117,6 +115,11 @@ app.factory('User', ['$resource', function ($resource) {
 //    return Post.query()
 //}
 
+app.controller('NavbarController', ['$scope', 'store', function($scope, store){
+    $scope.isLoggedIn = !!store.get('jwt')
+    //console.log($scope.isLoggedIn)
+}])
+
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
     $scope.user = user
@@ -153,6 +156,17 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
+
+
+    $scope.isCurrentUser = function(username){
+        console.log(username)
+        if(username === $scope.currentUser){
+            return true
+
+        }
+
+    }
+
 
     $scope.postStatus = function () {
         Post.save($scope.newPost,
@@ -212,15 +226,13 @@ app.controller('LogoutController', ['store', '$state', function (store, $state) 
     store.remove('jwt')
     store.remove('username')
     $state.go('login')
-    console.log(store.get('jwt'))
+    //console.log(store.get('jwt'))
 }])
 
 
 app.controller('LoginController', ['$scope', 'Login', 'store', '$state', function ($scope, Login, store, $state) {
 
     $scope.user = {}
-
-
     $scope.login = function () {
         Login.save($scope.user,
             function (success) {
