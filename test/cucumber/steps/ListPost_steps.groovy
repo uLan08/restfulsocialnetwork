@@ -7,14 +7,12 @@ Given(~/^I am logged in$/) { ->
     to LoginPage
     at LoginPage
     page.login("user1", "password")
-    to HomePage
-    at HomePage
-    assert page.isLoggedIn() == true
+//    assert page.isLoggedIn("user1") == true
 
 
 }
-When(~/^I go to the posts page$/) { ->
-    to PostPage
+When(~/^I am at the home page$/) { ->
+    at HomePage
 }
 Then(~/^I should see all the posts$/) { ->
     assert page.isEmpty() == false

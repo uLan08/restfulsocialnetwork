@@ -14,7 +14,9 @@
         Unit Test Results
      - All tests </h1>
 <p class="intro">
-                        A single test executed
+                        Executed
+                        2
+                        tests
                     
                         without a single error or failure!
                     </p>
@@ -53,7 +55,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">Logging in</b>
 </p>
-<p class="summary">Executed in 2.65 seconds.</p>
+<p class="summary">Executed in 2.474 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -64,7 +66,7 @@
 <pre class="stdout">Feature: logging in
 
 --Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:3
+  Scenario: Logging in                                                                       # Login.feature:4
     Given I am at the login page                                                             # Login_steps.groovy:8
     When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
     Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
@@ -74,6 +76,45 @@
 <h2>System error</h2>
 <pre class="syserr">
 --Output from Logging in--</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testsuite success">
+<div class="header">
+<h2>Logging out</h2>
+<h3>
+                        A single test executed
+                    
+                        without a single error or failure!
+                    </h3>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="Log out">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">Log out</b>
+</p>
+<p class="summary">Executed in 0.325 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="clearfix output footer">
+<div class="sysout">
+<h2>Standard output</h2>
+<pre class="stdout">Feature: Logging out
+
+--Output from Log out--
+  Scenario: Log out                                      # Logout.feature:4
+    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
+    When I click the logout button                       # Logout_steps.groovy:12
+    Then I should be redirected to the login page        # Logout_steps.groovy:15
+</pre>
+</div>
+<div class="syserr">
+<h2>System error</h2>
+<pre class="syserr">
+--Output from Log out--</pre>
 </div>
 </div>
 <div class="clear"></div>

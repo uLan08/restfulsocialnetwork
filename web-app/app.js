@@ -156,7 +156,31 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
+    //console.log($scope.currentUser)
 
+    $scope.hasLiked = function (postId) {
+        var index
+        for(var i = 0; i < $scope.posts.length; i++){
+            if($scope.posts[i].id == postId){
+                if($scope.posts[i].likers.length != null){
+                    console.log($scope.posts[i].likers)
+                    for(var j = 0; j < $scope.posts[i].likers.length; i++){
+                        if($scope.posts[i].likers[j].username == $scope.currentUser){
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+
+        //$scope.post = Post.get({postId: postId})
+        //for(var i = 0; i < $scope.post.likers.length; i++){
+        //    if($scope.post.likers[i].username == $scope.currentUser){
+        //        return true
+        //    }
+        //}
+    }
+    //console.log($scope.hasLiked(1))
 
     $scope.isCurrentUser = function(username){
         console.log(username)
