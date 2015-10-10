@@ -1,4 +1,4 @@
-var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title'])
+var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title', 'ngMessages'])
 
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInterceptorProvider',
@@ -190,7 +190,6 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         }
 
     }
-
 
     $scope.postStatus = function () {
         Post.save($scope.newPost,

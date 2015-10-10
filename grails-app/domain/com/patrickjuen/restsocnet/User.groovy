@@ -59,7 +59,7 @@ class User implements Serializable {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		password blank: false, minSize: 6
         likedPost nullable: true
 	}
 
