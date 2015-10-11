@@ -1,0 +1,7 @@
+<div class="col-md-12">
+    <div class="row" ng-repeat="notif in notifications">
+        {{notif.message}} at {{notif.dateCreated |  date: 'MMM dd, yyyy HH:mm' }}
+        <hr>
+    </div>
+
+</div>

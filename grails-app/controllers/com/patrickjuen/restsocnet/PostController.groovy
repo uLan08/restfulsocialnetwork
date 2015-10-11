@@ -1,8 +1,6 @@
 package com.patrickjuen.restsocnet
 
 import grails.converters.JSON
-
-//import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.security.access.annotation.Secured
 import grails.plugin.gson.converters.GSON
 
@@ -17,7 +15,18 @@ class PostController {
 
     def index() {
 //            JSON.use('deep')
-        render Post.list(sort: "dateCreated", order: "desc") as JSON
+        def posts = Post.list(sort: "dateCreated", order: "desc")
+        def postList = []
+        for(user in springSecurityService.currentUser.followedUsers){
+            for(post in posts){
+                if(user == post.user || post.user == springSecurityService.currentUser){
+                    postList << post
+                }
+            }
+        }
+        postList.sort{it.dateCreated}
+        postList = postList.reverse()
+        render postList as JSON
 
 
     }
@@ -45,8 +54,11 @@ class PostController {
         def post = Post.findById(params.id)
         if (!post.hasErrors()) {
             def currentUser = User.get(springSecurityService.principal.id)
+            def notif = new Notification(message: currentUser.toString() + " liked your post")
             post.addToLikers(currentUser)
+            post.user.addToNotifications(notif)
             post.save(flush: true)
+            notif.save()
             render(['success': true] as JSON)
         }
     }

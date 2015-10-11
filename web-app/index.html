@@ -12,43 +12,19 @@
     <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
     <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="bower_components/angular-ui-router-title/angular-ui-router-title.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="app.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <base href="/restsocnet/" />
 
-    <nav class="navber navbar-inverse navbar-static-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ui-sref="posts">Simple Social Network</a>
-        </div>
+    <div ui-view name="navbar">
 
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a ui-sref="profile">Profile</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a ui-sref="login" class="dropdown-toggle margin-left" data-toggle="dropdown"><strong class="glyphicon glyphicon-user"></strong>Login</a>
-                </li>
-                <li>
-                    <a ui-sref="logout">Logout</a>
-                </li>
-                <li>
-                    <a ui-sref="register">Register</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
+    </div>
 
     <div class="container">
-        <div ui-view></div>
+        <div ui-view name="content"></div>
     </div>
 
 

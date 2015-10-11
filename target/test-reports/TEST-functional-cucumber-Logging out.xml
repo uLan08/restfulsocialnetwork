@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Shadow" name="Logging out" tests="1" time="0.332" timestamp="2015-10-06T08:05:42">
+  <properties />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.325" />
+  <system-out><![CDATA[Feature: Logging out
+
+--Output from Log out--
+  Scenario: Log out                                      # Logout.feature:4
+    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
+    When I click the logout button                       # Logout_steps.groovy:12
+    Then I should be redirected to the login page        # Logout_steps.groovy:15
+]]></system-out>
+  <system-err><![CDATA[
+--Output from Log out--]]></system-err>
+</testsuite>

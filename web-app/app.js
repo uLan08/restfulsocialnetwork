@@ -1,4 +1,4 @@
-var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title'])
+var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title', 'ngMessages'])
 
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInterceptorProvider',
@@ -14,67 +14,141 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
         $stateProvider
             .state("posts", {
                 url: "/home",
-                templateUrl: "partials/posts.html",
-                resolve: {
-                    Post: 'Post',
-                    posts: ['Post', function (Post) {
-                        return Post.query().$promise
-                    }],
-                    $title: function() { return 'Home'}
-                },
                 data: {
                     requiresLogin: true
                 },
-                controller: 'PostController'
+                views: {
+                    navbar:{
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content: {
+                        templateUrl: "partials/posts.html",
+                        resolve: {
+                            Post: 'Post',
+                            posts: ['Post', function (Post) {
+                                return Post.query().$promise
+                            }],
+                            $title: function() { return 'Home'}
+                        },
+
+                        controller: 'PostController'
+                    }
+                }
+
             })
             .state("login", {
                 url: "/login",
-                templateUrl: "partials/login.html",
-                controller: 'LoginController',
                 data: {
                     requiresLogin: false
                 },
-                resolve: {
-                    $title: function() {return "Login"}
+                views:{
+                    navbar: {
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content: {
+                        templateUrl: "partials/login.html",
+                        controller: 'LoginController',
+
+                        resolve: {
+                            $title: function() {return "Login"}
+                        }
+                    }
                 }
+
             })
             .state("logout", {
                 url: "/logout",
-                controller: 'LogoutController',
                 data: {
                     requiresLogin: true
+                },
+                views:{
+                    navbar:{
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content:{
+                        controller: 'LogoutController',
+
+                    }
                 }
+
             })
             .state("profile", {
                 url: "/profile/:id",
-                templateUrl: 'partials/profile.html',
-                resolve: {
-                    User: 'User',
-                    user: ['User', '$stateParams', function(User, $stateParams){
-                        return User.get({userId: $stateParams.id}).$promise
-                    }],
-                    $title: ['user', function(user){
-                        return user.username
-                    }]
-                },
                 data: {
                     requiresLogin: true
                 },
-                controller: 'ProfileController'
+                views:{
+                    navbar:{
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content:{
+                        templateUrl: 'partials/profile.html',
+                        resolve: {
+                            User: 'User',
+                            user: ['User', '$stateParams', function(User, $stateParams){
+                                return User.get({userId: $stateParams.id}).$promise
+                            }],
+                            $title: ['user', function(user){
+                                return user.username
+                            }]
+                        },
+                        controller: 'ProfileController'
+                    }
+                }
+
             })
             .state("register", {
                 url: "/register",
-                templateUrl: "partials/register.html",
-                controller: "UserController",
+                views:{
+                    navbar:{
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content:{
+                        templateUrl: "partials/register.html",
+                        controller: "UserController",
+
+                        resolve: {
+                            $title: function(){return "Register"}
+                        }
+                    }
+                },
                 data: {
                     requiresLogin: false
-                },
-                resolve: {
-                    $title: function(){return "Register"}
                 }
+
             })
+            .state("notifications", {
+                url: "/notifications",
+                views:{
+                    navbar:{
+                        templateUrl: "partials/navbar.html",
+                        controller: 'NavbarController'
+                    },
+                    content:{
+                        templateUrl: "partials/notification.html",
+                        controller: "NotificationController",
 
+                        resolve: {
+                            Notification: 'Notification',
+                            notifications: ['Notification', function(Notification){
+                                return Notification.query().$promise
+                            }],
+                            $title: function(){
+                                return "Notifications"
+                            }
+                        }
+                    }
+                },
+                data: {
+                    requiresLogin: true
+                }
 
+            })
     }])
 
 app.run(['$rootScope', '$state', 'store', 'jwtHelper', '$stateParams', function ($rootScope, $state, store, jwtHelper, $stateParams) {
@@ -102,6 +176,14 @@ app.factory('Post', ['$resource', function ($resource) {
         })
 }])
 
+app.factory('Notification', ['$resource', function ($resource) {
+    return $resource('api/notifications/:notificationId', {notificationId: '@id'},
+        {
+            'update': {method: 'PUT'}
+        })
+}])
+
+
 app.factory('Login', ['$resource', function ($resource) {
     return $resource('api/login')
 }])
@@ -113,9 +195,17 @@ app.factory('User', ['$resource', function ($resource) {
         })
 }])
 
-//function reloadPosts(Post){
-//    return Post.query()
-//}
+app.controller('NotificationController', ['$scope', 'notifications', function($scope, notifications){
+    $scope.notifications = notifications
+}])
+
+app.controller('NavbarController', ['$scope', 'store', 'User', 'Notification', function($scope, store, User, Notification){
+    $scope.isLoggedIn = !!store.get('jwt')
+    $scope.users = User.query()
+    $scope.notifications = Notification.query()
+    console.log($scope.users)
+    //console.log($scope.isLoggedIn)
+}])
 
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
@@ -134,8 +224,8 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
                 $scope.newPost = {}
                 $scope.user = User.get({userId: $stateParams.id})
                 //$scope.userPosts = $scope.user.posts
-                console.log($scope.user)
                 console.log(result.success)
+
             },
             function (error) {
                 console.log(error)
@@ -146,13 +236,54 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
 
 }])
 
-app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', 'store', function ($scope, posts, User, Post, $interval, store) {
+app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', 'store', 'Notification', function ($scope, posts, User, Post, $interval, store, Notification) {
     //$scope.sum = 10
     //console.log(posts)
     $scope.users = User.query()
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
+    //$scope.notif = {}
+
+    //console.log($scope.currentUser)
+
+    $scope.hasFollowed = function(username){
+        for(var i = 0; i < $scope.users.length; i++) {
+            if($scope.users[i].username === username){
+                for(var j = 0; j < $scope.users[i].followers.length; j++){
+                    if($scope.users[i].followers[j].username === $scope.currentUser){
+                        return true
+                    }
+                }
+            }
+        }
+    }
+
+    $scope.hasLiked = function (postId) {
+        var index
+        for(var i = 0; i < $scope.posts.length; i++){
+            if($scope.posts[i].id === postId){
+                if($scope.posts[i].likers.length != null){
+                    console.log($scope.posts[i].likers)
+                    for(var j = 0; j < $scope.posts[i].likers.length; j++){
+                        if($scope.posts[i].likers[j].username == $scope.currentUser){
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //console.log($scope.hasLiked(1))
+
+    $scope.isCurrentUser = function(username){
+        console.log(username)
+        if(username === $scope.currentUser){
+            return true
+
+        }
+
+    }
 
     $scope.postStatus = function () {
         Post.save($scope.newPost,
@@ -177,6 +308,12 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         Post.update({postId: postid}, currentPost, function(response){
             console.log(response)
             $scope.posts = Post.query()
+            //$scope.notif.message = $scope.currentUser + " liked your post"
+            //Notification.save($scope.notif, function (response) {
+            //
+            //}, function(response){
+            //
+            //})
         }, function(response){
             console.log(response)
         })
@@ -184,7 +321,12 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
 
     $scope.follow = function (userId) {
         var userFollowed = User.get({userId: userId})
-        User.update({userId: userId}, userFollowed)
+        User.update({userId: userId}, userFollowed, function(response){
+            console.log(response)
+            $scope.users = User.query()
+        }, function(response){
+            console.log(response)
+        })
     }
     //
     //$interval(function () {
@@ -212,15 +354,13 @@ app.controller('LogoutController', ['store', '$state', function (store, $state) 
     store.remove('jwt')
     store.remove('username')
     $state.go('login')
-    console.log(store.get('jwt'))
+    //console.log(store.get('jwt'))
 }])
 
 
 app.controller('LoginController', ['$scope', 'Login', 'store', '$state', function ($scope, Login, store, $state) {
 
     $scope.user = {}
-
-
     $scope.login = function () {
         Login.save($scope.user,
             function (success) {

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="logging in" package="" tests="1" time="5.399" timestamp="2015-10-04T10:24:08">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="0" name="Logging out" package="" tests="1" time="0.332" timestamp="2015-10-06T08:05:42">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.359" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.325" />
+
+      <system-out><![CDATA[Feature: Logging out
+
+--Output from Log out--
+  Scenario: Log out                                      # Logout.feature:4
+    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
+    When I click the logout button                       # Logout_steps.groovy:12
+    Then I should be redirected to the login page        # Logout_steps.groovy:15
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from Log out--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Shadow" id="1" name="logging in" package="" tests="1" time="6.835" timestamp="2015-10-06T08:05:35">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.474" />
 
       <system-out><![CDATA[Feature: logging in
 
 --Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:3
+  Scenario: Logging in                                                                       # Login.feature:4
     Given I am at the login page                                                             # Login_steps.groovy:8
     When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
     Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16

@@ -12,8 +12,8 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	static hasMany = [posts: Post, likedPost: Post, followedUsers: User, followers: User]
-    static mappedBy = [posts: "user"]
+	static hasMany = [posts: Post, likedPost: Post, followedUsers: User, followers: User, notifications: Notification]
+    static mappedBy = [posts: "user", notifications: "user"]
     
 
 	User(String username, String password) {
@@ -59,7 +59,7 @@ class User implements Serializable {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		password blank: false, minSize: 6
         likedPost nullable: true
 	}
 
@@ -76,5 +76,13 @@ class User implements Serializable {
 
 	boolean isCurrentUser(){
 		return this.username == springSecurityService.currentUser
+	}
+
+	boolean hasFollowed(User user){
+		for(followed in this.followedUsers){
+			if(followed == user){
+				return true
+			}
+		}
 	}
 }

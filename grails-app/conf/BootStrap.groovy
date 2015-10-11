@@ -1,3 +1,4 @@
+import com.patrickjuen.restsocnet.Notification
 import com.patrickjuen.restsocnet.Post
 import com.patrickjuen.restsocnet.Role
 import com.patrickjuen.restsocnet.User
@@ -15,6 +16,7 @@ class BootStrap {
             returnArray['posts'] = it.posts
             returnArray['followedUsers'] = it.followedUsers
             returnArray['followers'] = it.followers
+            returnArray['notifications'] = it.notifications
             return returnArray
         }
         JSON.registerObjectMarshaller(Post) {
@@ -24,6 +26,12 @@ class BootStrap {
             returnArray['dateCreated'] = it.dateCreated
             returnArray['user'] = it.user
             returnArray['likers'] = it.likers
+            return returnArray
+        }
+        JSON.registerObjectMarshaller(Notification){
+            def returnArray = [:]
+            returnArray['message'] = it.message
+            returnArray['dateCreated'] = it.dateCreated
             return returnArray
         }
 
@@ -57,9 +65,14 @@ class BootStrap {
         UserRole.create(user1, role, true)
         UserRole.create(user2, role, true)
 
-        println user2.followers
-        println user1.followers
-        println user1.followedUsers
+        def notif1 = new Notification(message: user2.toString() + " liked your post")
+        def notif2 = new Notification(message: user1.toString() + " followed you")
+        notif1.save()
+        notif2.save()
+
+        user1.addToNotifications(notif1)
+        user2.addToNotifications(notif2)
+
     }
     def destroy = {
     }
