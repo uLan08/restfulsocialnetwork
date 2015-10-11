@@ -2,7 +2,11 @@
     <div class="row">
         <h3>Other Users:</h3>
         <ul ng-repeat="user in users">
+<<<<<<< HEAD
             <li ng-hide="isCurrentUser(user.username) || hasFollowed(user.username)">
+=======
+            <li ng-hide="isCurrentUser(user.username)">
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
                 <a ui-sref="profile({id: user.id})">{{user.username}}</a>
                 <button class="btn btn-small btn-primary" ng-click="follow(user.id)">Follow</button>
             </li>
@@ -26,14 +30,22 @@
         </div>
     </div>
     <div name="postContainer">
+<<<<<<< HEAD
         <div class="row" ng-repeat="post in posts">
+=======
+        <div class="row"  ng-repeat="post in posts">
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
             <div>
                <a ui-sref="profile({id: post.user.id})">{{post.user.username}}</a> at {{post.dateCreated | date: 'MMM dd, yyyy HH:mm'}}
             </div>
             <div>
                 {{post.content}}
             </div>
+<<<<<<< HEAD
             <div ng-hide="hasLiked(post.id)"><button name="likeBtn{{post.id}}" class="btn btn-primary" ng-click="like(post.id)">+Like </button></div>
+=======
+            <div ng-hide="hasLiked(post.id)"><button name="likeBtn$index"  class="btn btn-primary" ng-click="like(post.id)">+Like</button></div>
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
             <div ng-show="post.likers.length" name="likers">
                 <small ng-repeat="liker in post.likers" >
 

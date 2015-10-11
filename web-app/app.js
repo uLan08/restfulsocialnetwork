@@ -120,6 +120,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 data: {
                     requiresLogin: false
                 }
+<<<<<<< HEAD
 
             })
             .state("notifications", {
@@ -148,6 +149,8 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     requiresLogin: true
                 }
 
+=======
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
             })
     }])
 
@@ -207,6 +210,11 @@ app.controller('NavbarController', ['$scope', 'store', 'User', 'Notification', f
     //console.log($scope.isLoggedIn)
 }])
 
+app.controller('NavbarController', ['$scope', 'store', function($scope, store){
+    $scope.isLoggedIn = !!store.get('jwt')
+    //console.log($scope.isLoggedIn)
+}])
+
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
     $scope.user = user
@@ -243,6 +251,7 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
+<<<<<<< HEAD
     //$scope.notif = {}
 
     //console.log($scope.currentUser)
@@ -266,6 +275,17 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
                 if($scope.posts[i].likers.length != null){
                     console.log($scope.posts[i].likers)
                     for(var j = 0; j < $scope.posts[i].likers.length; j++){
+=======
+    //console.log($scope.currentUser)
+
+    $scope.hasLiked = function (postId) {
+        var index
+        for(var i = 0; i < $scope.posts.length; i++){
+            if($scope.posts[i].id == postId){
+                if($scope.posts[i].likers.length != null){
+                    console.log($scope.posts[i].likers)
+                    for(var j = 0; j < $scope.posts[i].likers.length; i++){
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
                         if($scope.posts[i].likers[j].username == $scope.currentUser){
                             return true
                         }
@@ -273,6 +293,16 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
                 }
             }
         }
+<<<<<<< HEAD
+=======
+
+        //$scope.post = Post.get({postId: postId})
+        //for(var i = 0; i < $scope.post.likers.length; i++){
+        //    if($scope.post.likers[i].username == $scope.currentUser){
+        //        return true
+        //    }
+        //}
+>>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
     }
     //console.log($scope.hasLiked(1))
 
