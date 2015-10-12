@@ -17,10 +17,20 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 data: {
                     requiresLogin: true
                 },
+                resolve:{
+                    $title: function() { return 'Home'}
+
+                },
                 views: {
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+                        resolve:{
+                            User: 'User',
+                            users: ['User', function(User){
+                                return User.query().$promise
+                            }]
+                        }
                     },
                     content: {
                         templateUrl: "partials/posts.html",
@@ -28,10 +38,8 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                             Post: 'Post',
                             posts: ['Post', function (Post) {
                                 return Post.query().$promise
-                            }],
-                            $title: function() { return 'Home'}
+                            }]
                         },
-
                         controller: 'PostController'
                     }
                 }
@@ -42,6 +50,9 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 data: {
                     requiresLogin: false
                 },
+                resolve: {
+                    $title: function() {return "Login"}
+                },
                 views:{
                     navbar: {
                         templateUrl: "partials/navbar.html",
@@ -49,11 +60,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     },
                     content: {
                         templateUrl: "partials/login.html",
-                        controller: 'LoginController',
-
-                        resolve: {
-                            $title: function() {return "Login"}
-                        }
+                        controller: 'LoginController'
                     }
                 }
 
@@ -63,10 +70,15 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 data: {
                     requiresLogin: true
                 },
+                resolve:{
+                    $title: function() {return "Logout"}
+
+                },
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+
                     },
                     content:{
                         controller: 'LogoutController',
@@ -83,26 +95,37 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+                        resolve:{
+                            User: 'User',
+                            users: ['User', function(User){
+                                return User.query().$promise
+                            }]
+                        }
                     },
                     content:{
                         templateUrl: 'partials/profile.html',
-                        resolve: {
-                            User: 'User',
-                            user: ['User', '$stateParams', function(User, $stateParams){
-                                return User.get({userId: $stateParams.id}).$promise
-                            }],
-                            $title: ['user', function(user){
-                                return user.username
-                            }]
-                        },
+
                         controller: 'ProfileController'
                     }
+                },
+                resolve: {
+                    User: 'User',
+                    user: ['User', '$stateParams', function(User, $stateParams){
+                        return User.get({userId: $stateParams.id}).$promise
+                    }],
+                    $title: ['user', function(user){
+                        return user.username
+                    }]
                 }
+
 
             })
             .state("register", {
                 url: "/register",
+                resolve:{
+                    $title: function(){return "Register"}
+                },
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
@@ -110,25 +133,31 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     },
                     content:{
                         templateUrl: "partials/register.html",
-                        controller: "UserController",
-
-                        resolve: {
-                            $title: function(){return "Register"}
-                        }
+                        controller: "UserController"
                     }
                 },
                 data: {
                     requiresLogin: false
                 }
-<<<<<<< HEAD
 
             })
             .state("notifications", {
                 url: "/notifications",
+                resolve:{
+                    $title: function(){
+                        return "Notifications"
+                    }
+                },
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+                        resolve:{
+                            User: 'User',
+                            users: ['User', function(User){
+                                return User.query().$promise
+                            }]
+                        }
                     },
                     content:{
                         templateUrl: "partials/notification.html",
@@ -139,9 +168,6 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                             notifications: ['Notification', function(Notification){
                                 return Notification.query().$promise
                             }],
-                            $title: function(){
-                                return "Notifications"
-                            }
                         }
                     }
                 },
@@ -149,8 +175,6 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     requiresLogin: true
                 }
 
-=======
->>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
             })
     }])
 
@@ -202,18 +226,26 @@ app.controller('NotificationController', ['$scope', 'notifications', function($s
     $scope.notifications = notifications
 }])
 
-app.controller('NavbarController', ['$scope', 'store', 'User', 'Notification', function($scope, store, User, Notification){
+app.controller('NavbarController', ['$scope', 'store', 'users', 'Notification', function($scope, store, users, Notification){
     $scope.isLoggedIn = !!store.get('jwt')
-    $scope.users = User.query()
+    $scope.users = users
+    $scope.currentUser = store.get('username')
+
+    for(var user in $scope.users){
+        if(user === $scope.currentUser){
+            console.log(user)
+            $scope.currentUserId = user.id
+        }
+    }
     $scope.notifications = Notification.query()
     console.log($scope.users)
     //console.log($scope.isLoggedIn)
 }])
 
-app.controller('NavbarController', ['$scope', 'store', function($scope, store){
-    $scope.isLoggedIn = !!store.get('jwt')
-    //console.log($scope.isLoggedIn)
-}])
+//app.controller('NavbarController', ['$scope', 'store', function($scope, store){
+//    $scope.isLoggedIn = !!store.get('jwt')
+//    //console.log($scope.isLoggedIn)
+//}])
 
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
@@ -251,7 +283,6 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
-<<<<<<< HEAD
     //$scope.notif = {}
 
     //console.log($scope.currentUser)
@@ -268,15 +299,7 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         }
     }
 
-    $scope.hasLiked = function (postId) {
-        var index
-        for(var i = 0; i < $scope.posts.length; i++){
-            if($scope.posts[i].id === postId){
-                if($scope.posts[i].likers.length != null){
-                    console.log($scope.posts[i].likers)
-                    for(var j = 0; j < $scope.posts[i].likers.length; j++){
-=======
-    //console.log($scope.currentUser)
+
 
     $scope.hasLiked = function (postId) {
         var index
@@ -284,8 +307,7 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
             if($scope.posts[i].id == postId){
                 if($scope.posts[i].likers.length != null){
                     console.log($scope.posts[i].likers)
-                    for(var j = 0; j < $scope.posts[i].likers.length; i++){
->>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
+                    for(var j = 0; j < $scope.posts[i].likers.length; j++){
                         if($scope.posts[i].likers[j].username == $scope.currentUser){
                             return true
                         }
@@ -293,16 +315,7 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
                 }
             }
         }
-<<<<<<< HEAD
-=======
 
-        //$scope.post = Post.get({postId: postId})
-        //for(var i = 0; i < $scope.post.likers.length; i++){
-        //    if($scope.post.likers[i].username == $scope.currentUser){
-        //        return true
-        //    }
-        //}
->>>>>>> f4183c54405efe55ebfcb53d543e343cd4a473de
     }
     //console.log($scope.hasLiked(1))
 
@@ -354,6 +367,7 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         User.update({userId: userId}, userFollowed, function(response){
             console.log(response)
             $scope.users = User.query()
+            $scope.posts = Post.query()
         }, function(response){
             console.log(response)
         })

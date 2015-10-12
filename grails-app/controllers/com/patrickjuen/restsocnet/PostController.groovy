@@ -54,7 +54,7 @@ class PostController {
         def post = Post.findById(params.id)
         if (!post.hasErrors()) {
             def currentUser = User.get(springSecurityService.principal.id)
-            def notif = new Notification(message: currentUser.toString() + " liked your post")
+            def notif = new Notification(message: currentUser.toString() + " liked your post (" + post.content + ")")
             post.addToLikers(currentUser)
             post.user.addToNotifications(notif)
             post.save(flush: true)

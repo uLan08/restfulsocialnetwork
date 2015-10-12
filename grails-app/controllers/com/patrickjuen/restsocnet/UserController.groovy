@@ -67,7 +67,7 @@ class UserController {
             currentUser.save(flush:true)
             user.save(flush:true)
             notif.save()
-            return (['success':true] as JSON)
+            render (['success':true] as JSON)
         }
 
     }
