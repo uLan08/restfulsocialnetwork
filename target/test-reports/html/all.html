@@ -14,9 +14,7 @@
         Unit Test Results
      - All tests </h1>
 <p class="intro">
-                        Executed
-                        2
-                        tests
+                        A single test executed
                     
                         without a single error or failure!
                     </p>
@@ -43,19 +41,19 @@
 <div class="clear"></div>
 <div class="testsuite success">
 <div class="header">
-<h2>logging in</h2>
+<h2>Follow a user</h2>
 <h3>
                         A single test executed
                     
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="Logging in">
+<div class="testcase clearfix success grid_8 alpha omega" data-name="Follow user">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">Logging in</b>
+<span class="icon success"></span><b class="testname message success">Follow user</b>
 </p>
-<p class="summary">Executed in 2.474 seconds.</p>
+<p class="summary">Executed in 3.62 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -63,58 +61,19 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">Feature: logging in
+<pre class="stdout">Feature: Follow a user
 
---Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:4
-    Given I am at the login page                                                             # Login_steps.groovy:8
-    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
-    Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
+--Output from Follow user--
+  Scenario: Follow user                                                   # FollowUser.feature:3
+    Given I am logged in as "user2" and at the home page                  # FollowUser_steps.groovy:4
+    When I click follow "user1"                                           # FollowUser_steps.groovy:10
+    Then I should see "user1" in the list of followed users in my profile # FollowUser_steps.groovy:14
 </pre>
 </div>
 <div class="syserr">
 <h2>System error</h2>
 <pre class="syserr">
---Output from Logging in--</pre>
-</div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="testsuite success">
-<div class="header">
-<h2>Logging out</h2>
-<h3>
-                        A single test executed
-                    
-                        without a single error or failure!
-                    </h3>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="Log out">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">Log out</b>
-</p>
-<p class="summary">Executed in 0.325 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="clearfix output footer">
-<div class="sysout">
-<h2>Standard output</h2>
-<pre class="stdout">Feature: Logging out
-
---Output from Log out--
-  Scenario: Log out                                      # Logout.feature:4
-    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
-    When I click the logout button                       # Logout_steps.groovy:12
-    Then I should be redirected to the login page        # Logout_steps.groovy:15
-</pre>
-</div>
-<div class="syserr">
-<h2>System error</h2>
-<pre class="syserr">
---Output from Log out--</pre>
+--Output from Follow user--</pre>
 </div>
 </div>
 <div class="clear"></div>

@@ -1,13 +1,13 @@
 <h1>{{user.username}}</h1>
 <div class="row">
     <strong>Followers:</strong>
-    <ul ng-repeat="follower in user.followers">
+    <ul ng-repeat="follower in user.followers" name="followerList">
         <a ui-sref="profile({id: follower.id})"></ag><li>{{follower.username}}</li></a>
     </ul>
 </div>
 <div class="row">
     <strong>Following:</strong>
-    <ul ng-repeat="followed in user.followedUsers">
+    <ul ng-repeat="followed in user.followedUsers" name="followedList">
         <a ui-sref="profile({id: followed.id})"><li>{{followed.username}}</li></a>
     </ul>
 </div>

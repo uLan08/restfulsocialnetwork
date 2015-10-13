@@ -1,3 +1,4 @@
+@ignore
 
 Feature: logging in
 

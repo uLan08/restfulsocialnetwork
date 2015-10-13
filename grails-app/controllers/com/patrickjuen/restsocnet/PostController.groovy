@@ -17,13 +17,23 @@ class PostController {
 //            JSON.use('deep')
         def posts = Post.list(sort: "dateCreated", order: "desc")
         def postList = []
-        for(user in springSecurityService.currentUser.followedUsers){
-            for(post in posts){
-                if(user == post.user || post.user == springSecurityService.currentUser){
+
+        for(post in posts){
+            if(post.user ==  springSecurityService.currentUser){
+                postList << post
+            }
+            for(user in springSecurityService.currentUser.followedUsers){
+                if(user == post.user){
                     postList << post
                 }
             }
         }
+//        for(user in springSecurityService.currentUser.followedUsers){
+//            for(post in posts){
+//                if(user == post.user || post.user == springSecurityService.currentUser){
+//                }
+//            }
+//        }
         postList.sort{it.dateCreated}
         postList = postList.reverse()
         render postList as JSON

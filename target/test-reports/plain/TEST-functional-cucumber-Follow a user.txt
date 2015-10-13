@@ -1,0 +1,16 @@
+Testsuite: Follow a user
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 6.994 sec
+------------- Standard Output ---------------
+Feature: Follow a user
+
+--Output from Follow user--
+  Scenario: Follow user                                                   # FollowUser.feature:3
+    Given I am logged in as "user2" and at the home page                  # FollowUser_steps.groovy:4
+    When I click follow "user1"                                           # FollowUser_steps.groovy:10
+    Then I should see "user1" in the list of followed users in my profile # FollowUser_steps.groovy:14
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+
+--Output from Follow user--------------- ---------------- ---------------
+
+Testcase: Follow user took 3.62 sec

@@ -1,10 +1,11 @@
-var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title', 'ngMessages'])
+var app = angular.module("restsocnet", ['ngResource', 'ui.router', 'angular-storage', 'angular-jwt', 'ui.router.title', 'ngMessages', 'emguo.poller'])
 
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInterceptorProvider',
-    '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
+    '$httpProvider', 'pollerConfig', function ($stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider, pollerConfig) {
         $locationProvider.html5Mode(true)
         $urlRouterProvider.otherwise('/home')
+        pollerConfig.stopOnStateChange = true
 
         jwtInterceptorProvider.tokenGetter = function (store) {
             return store.get('jwt')
@@ -18,19 +19,25 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     requiresLogin: true
                 },
                 resolve:{
-                    $title: function() { return 'Home'}
-
+                    $title: function() { return 'Home'},
+                    User: 'User',
+                    users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                        if(!(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))){
+                            return User.query().$promise
+                        }
+                    }]
                 },
                 views: {
                     navbar:{
                         templateUrl: "partials/navbar.html",
                         controller: 'NavbarController',
-                        resolve:{
-                            User: 'User',
-                            users: ['User', function(User){
-                                return User.query().$promise
-                            }]
-                        }
+                        //resolve:{
+                        //    notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                        //        if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                        //            return Notification.query().$promise
+                        //        }
+                        //    }]
+                        //}
                     },
                     content: {
                         templateUrl: "partials/posts.html",
@@ -51,12 +58,27 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     requiresLogin: false
                 },
                 resolve: {
-                    $title: function() {return "Login"}
+                    $title: function() {return "Login"},
+                    User: 'User',
+                    users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                        if(!(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))){
+                            return User.query().$promise
+                        }
+                    }]
+
                 },
                 views:{
                     navbar: {
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+                        //resolve:{
+                        //    Notification: 'Notification',
+                        //    notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                        //        if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                        //            return Notification.query().$promise
+                        //        }
+                        //    }]
+                        //}
                     },
                     content: {
                         templateUrl: "partials/login.html",
@@ -71,13 +93,28 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                     requiresLogin: true
                 },
                 resolve:{
-                    $title: function() {return "Logout"}
+                    $title: function() {return "Logout"},
+                    User: 'User',
+                    users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                        if(!(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))){
+                            return User.query().$promise
+                        }
+                    }],
+
 
                 },
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
                         controller: 'NavbarController',
+                        //resolve:{
+                        //    Notification: 'Notification',
+                        //    notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                        //        if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                        //            return Notification.query().$promise
+                        //        }
+                        //    }]
+                        //}
 
                     },
                     content:{
@@ -98,9 +135,19 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                         controller: 'NavbarController',
                         resolve:{
                             User: 'User',
-                            users: ['User', function(User){
-                                return User.query().$promise
-                            }]
+                            users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                                if(!(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))){
+                                    return User.query().$promise
+
+                                }
+                            }],
+                            //Notification: 'Notification',
+                            //notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                            //    if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                            //        return Notification.query().$promise
+                            //    }
+                            //}]
+
                         }
                     },
                     content:{
@@ -124,7 +171,19 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
             .state("register", {
                 url: "/register",
                 resolve:{
-                    $title: function(){return "Register"}
+                    $title: function(){return "Register"},
+                    User: 'User',
+                    users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                        if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                            return User.query().$promise
+                        }
+                    }],
+                    //Notification: 'Notification',
+                    //notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                    //    if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                    //        return Notification.query().$promise
+                    //    }
+                    //}]
                 },
                 views:{
                     navbar:{
@@ -151,13 +210,25 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController',
                         resolve:{
                             User: 'User',
-                            users: ['User', function(User){
-                                return User.query().$promise
-                            }]
-                        }
+                            users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                                if(!(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))){
+                                    return User.query().$promise
+                                }
+                            }],
+                            //Notification: 'Notification',
+                            ////notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
+                            ////    //if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                            ////        return Notification.query().$promise
+                            ////    //}
+                            ////}]
+                            //notifications: ['Notification', function(Notification){
+                            //    return Notification.query().$promise
+                            //}]
+                        },
+                        controller: 'NavbarController',
+
                     },
                     content:{
                         templateUrl: "partials/notification.html",
@@ -178,7 +249,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
             })
     }])
 
-app.run(['$rootScope', '$state', 'store', 'jwtHelper', '$stateParams', function ($rootScope, $state, store, jwtHelper, $stateParams) {
+app.run(['$rootScope', '$state', 'store', 'jwtHelper', '$stateParams', 'IsLoggedOut', function ($rootScope, $state, store, jwtHelper, $stateParams, IsLoggedOut) {
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
 
@@ -210,6 +281,10 @@ app.factory('Notification', ['$resource', function ($resource) {
         })
 }])
 
+app.factory('IsLoggedOut', ['store', 'jwtHelper', function(store, jwtHelper){
+    return !store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt'))
+}])
+
 
 app.factory('Login', ['$resource', function ($resource) {
     return $resource('api/login')
@@ -222,23 +297,47 @@ app.factory('User', ['$resource', function ($resource) {
         })
 }])
 
-app.controller('NotificationController', ['$scope', 'notifications', function($scope, notifications){
+app.controller('NotificationController', ['$scope', 'notifications', 'poller', 'Notification', function($scope, notifications, poller, Notification){
     $scope.notifications = notifications
+    var notifPoller = poller.get(Notification, {
+        action: 'query'
+    })
+    notifPoller.promise.then(null, null, function(result){
+        $scope.notifications = result
+    })
 }])
 
-app.controller('NavbarController', ['$scope', 'store', 'users', 'Notification', function($scope, store, users, Notification){
-    $scope.isLoggedIn = !!store.get('jwt')
-    $scope.users = users
+app.controller('NavbarController', ['$scope', 'store', 'User' ,'$state', 'users', 'jwtHelper', 'Notification', 'poller', function($scope, store, User, $state, users, jwtHelper, Notification, poller){
+    $scope.isLoggedIn = !(!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt')))
     $scope.currentUser = store.get('username')
 
-    for(var user in $scope.users){
-        if(user === $scope.currentUser){
-            console.log(user)
-            $scope.currentUserId = user.id
+    //for(var user in $scope.users){
+    //    if(user.username === $scope.currentUser){
+    //        console.log(user)
+    //        $scope.currentUserId = user.id
+    //        console.log($scope.currentUserId)
+    //    }
+    //}
+
+    if($scope.isLoggedIn){
+        $scope.notifications = Notification.query()
+        $scope.users = users
+        var poller = poller.get(Notification, {
+            action: 'query'
+        })
+        poller.promise.then(null, null, function(result){
+            $scope.notifications = result
+        })
+        for(var i = 0; i < $scope.users.length; i++){
+            if($scope.users[i].username === $scope.currentUser){
+                $scope.currentUserId = $scope.users[i].id
+            }
         }
     }
-    $scope.notifications = Notification.query()
-    console.log($scope.users)
+    //$scope.goToProfile = function(){
+    //    $state.go('profile', {id: $scope.currentUserId})
+    //
+    //}
     //console.log($scope.isLoggedIn)
 }])
 
@@ -250,7 +349,6 @@ app.controller('NavbarController', ['$scope', 'store', 'users', 'Notification', 
 app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', 'store', '$state', 'Post', function($scope, $stateParams, user, User, store, $state, Post){
     $scope.newPost = {}
     $scope.user = user
-    console.log($scope.user)
     //$scope.userPosts = $scope.user.posts
     //$scope.load()
     if($scope.user.username === store.get('username')){
@@ -258,7 +356,6 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
     }
 
     $scope.postStatus = function () {
-        console.log($scope.newPost)
         Post.save($scope.newPost,
             function (result) {
                 $scope.newPost = {}
@@ -276,14 +373,25 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
 
 }])
 
-app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', 'store', 'Notification', function ($scope, posts, User, Post, $interval, store, Notification) {
+app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval', 'store', 'poller', function ($scope, posts, User, Post, $interval, store, poller) {
     //$scope.sum = 10
     //console.log(posts)
     $scope.users = User.query()
     $scope.posts = posts
     $scope.newPost = {}
     $scope.currentUser = store.get('username')
-    //$scope.notif = {}
+    var postPoller = poller.get(Post, {
+        action: 'query'
+    })
+    var userPoller = poller.get(User, {
+        action: 'query'
+    })
+    postPoller.promise.then(null, null, function(result){
+        $scope.posts = result
+    })
+    userPoller.promise.then(null, null, function(result){
+        $scope.users = result
+    })
 
     //console.log($scope.currentUser)
 
@@ -306,7 +414,6 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
         for(var i = 0; i < $scope.posts.length; i++){
             if($scope.posts[i].id == postId){
                 if($scope.posts[i].likers.length != null){
-                    console.log($scope.posts[i].likers)
                     for(var j = 0; j < $scope.posts[i].likers.length; j++){
                         if($scope.posts[i].likers[j].username == $scope.currentUser){
                             return true
@@ -320,7 +427,6 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
     //console.log($scope.hasLiked(1))
 
     $scope.isCurrentUser = function(username){
-        console.log(username)
         if(username === $scope.currentUser){
             return true
 

@@ -14,4 +14,6 @@ When(~/^I write "([^"]*)" in the text area and click post$/) { String arg1 ->
 }
 Then(~/^I should see "([^"]*)" in the list of posts$/) { String arg1 ->
     assert page.hasPosted(arg1) == true
+    to LogoutPage
+
 }

@@ -11,15 +11,26 @@ class HomePage extends Page{
     static content = {
         logoutBtn { $("a", text: "Logout")}
         loginTxt { $("div", name: "greeting") }
+        likeBtn4 { $("button", name:"likeBtn4")}
+        followBtn1 {$("button", name:"followBtn1")}
         textArea { $("textarea") }
-        likeBtn { $("button") }
         postContainer  { $("div", name: "postContainer") }
         postBtn { $("button", name:"postBtn") }
+        profileBtn { $("a", name: "profileBtn")}
 
     }
 
-    def like(){
+    def goToProfile(){
+        profileBtn.click()
+    }
 
+    def like(){
+//        $("button", text: content).click()
+        likeBtn4.click()
+    }
+
+    def follow(){
+        followBtn1.click()
     }
 
     def post(String content){
@@ -32,6 +43,10 @@ class HomePage extends Page{
     }
 
     def hasPosted(String content){
+        return $("div", text: contains(content)) != null
+    }
+
+    def hasLiked(String content){
         return $("div", text: contains(content)) != null
     }
 

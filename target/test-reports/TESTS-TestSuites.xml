@@ -1,39 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Shadow" id="0" name="Logging out" package="" tests="1" time="0.332" timestamp="2015-10-06T08:05:42">
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="Follow a user" package="" tests="1" time="6.994" timestamp="2015-10-13T13:56:13">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.325" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="3.62" />
 
-      <system-out><![CDATA[Feature: Logging out
+      <system-out><![CDATA[Feature: Follow a user
 
---Output from Log out--
-  Scenario: Log out                                      # Logout.feature:4
-    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
-    When I click the logout button                       # Logout_steps.groovy:12
-    Then I should be redirected to the login page        # Logout_steps.groovy:15
+--Output from Follow user--
+  Scenario: Follow user                                                   # FollowUser.feature:3
+    Given I am logged in as "user2" and at the home page                  # FollowUser_steps.groovy:4
+    When I click follow "user1"                                           # FollowUser_steps.groovy:10
+    Then I should see "user1" in the list of followed users in my profile # FollowUser_steps.groovy:14
 ]]></system-out>
 
       <system-err><![CDATA[
---Output from Log out--]]></system-err>
-
-  </testsuite>
-  <testsuite errors="0" failures="0" hostname="Shadow" id="1" name="logging in" package="" tests="1" time="6.835" timestamp="2015-10-06T08:05:35">
-      <properties />
-
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.474" />
-
-      <system-out><![CDATA[Feature: logging in
-
---Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:4
-    Given I am at the login page                                                             # Login_steps.groovy:8
-    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
-    Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
-]]></system-out>
-
-      <system-err><![CDATA[
---Output from Logging in--]]></system-err>
+--Output from Follow user--]]></system-err>
 
   </testsuite>
 </testsuites>

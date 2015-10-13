@@ -4,7 +4,7 @@
         <ul ng-repeat="user in users">
             <li ng-hide="isCurrentUser(user.username) || hasFollowed(user.username)">
                 <a ui-sref="profile({id: user.id})">{{user.username}}</a>
-                <button class="btn btn-small btn-primary" ng-click="follow(user.id)">Follow</button>
+                <button class="btn btn-small btn-primary" name="followBtn{{user.id}}" ng-click="follow(user.id)">Follow</button>
             </li>
         </ul>
     </div>

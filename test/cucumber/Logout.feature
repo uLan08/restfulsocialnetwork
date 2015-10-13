@@ -1,3 +1,5 @@
+@ignore
+
 
 Feature: Logging out
 

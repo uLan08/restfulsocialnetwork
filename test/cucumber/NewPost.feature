@@ -1,4 +1,5 @@
 @ignore
+
 Feature: Posting new post
 
   Scenario: New Post
