@@ -1,6 +1,7 @@
 <div class="login jumbotron center-block">
     <h1>Login</h1>
     <form role="form">
+        <pre ng-show="showError">Invalid username or password</pre>
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" ng-model="user.username" name="username" id="username" placeholder="Username">

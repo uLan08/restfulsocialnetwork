@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="Follow a user" tests="1" time="6.994" timestamp="2015-10-13T13:56:13">
+<testsuite errors="0" failures="0" hostname="Poseidon" name="Follow a user" tests="1" time="11.769" timestamp="2015-10-14T18:38:40">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="3.62" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="7.32" />
   <system-out><![CDATA[Feature: Follow a user
 
 --Output from Follow user--

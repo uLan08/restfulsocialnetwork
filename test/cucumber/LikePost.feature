@@ -1,4 +1,3 @@
-@ignore
 Feature: Like a post
 
   Scenario: Like a Post

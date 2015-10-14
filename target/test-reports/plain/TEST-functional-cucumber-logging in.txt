@@ -1,10 +1,10 @@
 Testsuite: logging in
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 6.835 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.769 sec
 ------------- Standard Output ---------------
 Feature: logging in
 
 --Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:4
+  Scenario: Logging in                                                                       # Login.feature:3
     Given I am at the login page                                                             # Login_steps.groovy:8
     When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
     Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
@@ -13,4 +13,4 @@ Feature: logging in
 
 --Output from Logging in--------------- ---------------- ---------------
 
-Testcase: Logging in took 2.474 sec
+Testcase: Logging in took 0.76 sec

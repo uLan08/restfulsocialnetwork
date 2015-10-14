@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Shadow" name="logging in" tests="1" time="6.835" timestamp="2015-10-06T08:05:35">
+<testsuite errors="0" failures="0" hostname="Poseidon" name="logging in" tests="1" time="0.769" timestamp="2015-10-14T18:38:56">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="2.474" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="0.76" />
   <system-out><![CDATA[Feature: logging in
 
 --Output from Logging in--
-  Scenario: Logging in                                                                       # Login.feature:4
+  Scenario: Logging in                                                                       # Login.feature:3
     Given I am at the login page                                                             # Login_steps.groovy:8
     When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
     Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16

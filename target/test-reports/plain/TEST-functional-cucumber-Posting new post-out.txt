@@ -1,0 +1,7 @@
+Feature: Posting new post
+
+--Output from New Post--
+  Scenario: New Post                                                  # NewPost.feature:4
+    Given I am logged in and at the home page                         # NewPost_steps.groovy:4
+    When I write "This is a new post" in the text area and click post # NewPost_steps.groovy:10
+    Then I should see "This is a new post" in the list of posts       # NewPost_steps.groovy:15

@@ -355,6 +355,25 @@ app.controller('ProfileController', ['$scope', '$stateParams', 'user', 'User', '
         $scope.isCurrentUser = true;
     }
 
+    //$scope.hasLiked = function(postId){
+    //    for(var i = 0; i < $scope.user.posts.length; i++){
+    //        if($scope.user.posts[i].id === postId && $scope.user.posts[i].likers != null){
+    //            for(var j = 0; j < $scope.user.posts[i].likers.length; j++){
+    //                if($scope.user.posts[i].likers[j].username === store.get('username')){
+    //                    return true
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+    //
+    //$scope.like = function(postId){
+    //    var currentPost = Post.get({postId: postId})
+    //    Post.update({postId: postId}, currentPost, function(){
+    //        $scope.user = User.get({userId: $stateParams.id})
+    //    })
+    //}
+
     $scope.postStatus = function () {
         Post.save($scope.newPost,
             function (result) {
@@ -448,11 +467,11 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
 
     $scope.like = function(postid){
         var index;
-        for(var i = 0; i < $scope.posts.length; i++ ){
-            if($scope.posts[i].id === postid){
-                index = i;
-            }
-        }
+        //for(var i = 0; i < $scope.posts.length; i++ ){
+        //    if($scope.posts[i].id === postid){
+        //        index = i;
+        //    }
+        //}
         var currentPost = Post.get({postId: postid})
         Post.update({postId: postid}, currentPost, function(response){
             console.log(response)
@@ -486,14 +505,20 @@ app.controller('PostController', ['$scope', 'posts', 'User', 'Post', '$interval'
 
 app.controller('UserController', ['$scope', 'User', '$state', function ($scope, User, $state) {
     $scope.user = {}
+    $scope.errors = []
 
     $scope.register = function () {
+        $scope.errors = []
         User.save($scope.user, function (result) {
-            console.log(result)
             $state.go('login')
         }, function (error) {
-            console.log(error)
             $scope.user = {}
+            //for(var e in error.data.errors){
+            //    $scope.errors = e
+            //}
+            for(var i = 0; i < error.data.errors.length; i++){
+                $scope.errors.push(error.data.errors[i])
+            }
         })
     }
 }])
@@ -511,16 +536,18 @@ app.controller('LogoutController', ['store', '$state', function (store, $state) 
 app.controller('LoginController', ['$scope', 'Login', 'store', '$state', function ($scope, Login, store, $state) {
 
     $scope.user = {}
+    $scope.showError = false
     $scope.login = function () {
         Login.save($scope.user,
             function (success) {
-                console.log(success)
                 store.set('jwt', success.access_token)
                 store.set('username', success.username)
                 $state.go('posts')
             }, function (error) {
                 $scope.user = {}
-                console.log(error)
+                if(error.status === 401){
+                    $scope.showError = true
+                }
             })
 
     }

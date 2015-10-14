@@ -1,10 +1,10 @@
 Testsuite: Logging out
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.332 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.367 sec
 ------------- Standard Output ---------------
 Feature: Logging out
 
 --Output from Log out--
-  Scenario: Log out                                      # Logout.feature:4
+  Scenario: Log out                                      # Logout.feature:5
     Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
     When I click the logout button                       # Logout_steps.groovy:12
     Then I should be redirected to the login page        # Logout_steps.groovy:15
@@ -13,4 +13,4 @@ Feature: Logging out
 
 --Output from Log out--------------- ---------------- ---------------
 
-Testcase: Log out took 0.325 sec
+Testcase: Log out took 0.358 sec

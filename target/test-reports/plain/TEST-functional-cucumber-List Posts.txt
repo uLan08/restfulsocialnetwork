@@ -1,16 +1,16 @@
 Testsuite: List Posts
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 5.143 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 1.964 sec
 ------------- Standard Output ---------------
 Feature: List Posts
 
 --Output from See all posts--
-  Scenario: See all posts           # ListPost.feature:3
+  Scenario: See all posts           # ListPost.feature:4
     Given I am logged in            # ListPost_steps.groovy:6
-    When I go to the posts page     # ListPost_steps.groovy:16
-    Then I should see all the posts # ListPost_steps.groovy:19
+    When I am at the home page      # ListPost_steps.groovy:14
+    Then I should see all the posts # ListPost_steps.groovy:17
 ------------- ---------------- ---------------
 ------------- Standard Error -----------------
 
 --Output from See all posts--------------- ---------------- ---------------
 
-Testcase: See all posts took 2.174 sec
+Testcase: See all posts took 1.955 sec

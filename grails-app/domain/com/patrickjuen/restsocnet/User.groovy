@@ -85,4 +85,16 @@ class User implements Serializable {
 			}
 		}
 	}
+
+	boolean hasLiked(Post post){
+		for(currentPost in this.posts){
+			if(post == currentPost){
+				for(liker in this.posts.likers){
+					if(liker == this){
+						return true
+					}
+				}
+			}
+		}
+	}
 }

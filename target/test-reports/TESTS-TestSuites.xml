@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="Follow a user" package="" tests="1" time="6.994" timestamp="2015-10-13T13:56:13">
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="Follow a user" package="" tests="1" time="11.769" timestamp="2015-10-14T18:38:40">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="3.62" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="7.32" />
 
       <system-out><![CDATA[Feature: Follow a user
 
@@ -16,6 +16,96 @@
 
       <system-err><![CDATA[
 --Output from Follow user--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="1" name="Like a post" package="" tests="1" time="2.584" timestamp="2015-10-14T18:38:51">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Like a Post" time="2.567" />
+
+      <system-out><![CDATA[Feature: Like a post
+
+--Output from Like a Post--
+  Scenario: Like a Post                              # LikePost.feature:3
+    Given I am logged in and at the home page        # NewPost_steps.groovy:4
+    When I like the post "i am user2 guys hehehe"    # LikePost_steps.groovy:11
+    Then I should see "user1 liked this" on the post # LikePost_steps.groovy:15
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from Like a Post--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="2" name="List Posts" package="" tests="1" time="1.964" timestamp="2015-10-14T18:38:54">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="1.955" />
+
+      <system-out><![CDATA[Feature: List Posts
+
+--Output from See all posts--
+  Scenario: See all posts           # ListPost.feature:4
+    Given I am logged in            # ListPost_steps.groovy:6
+    When I am at the home page      # ListPost_steps.groovy:14
+    Then I should see all the posts # ListPost_steps.groovy:17
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from See all posts--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="3" name="Logging out" package="" tests="1" time="0.367" timestamp="2015-10-14T18:38:57">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.358" />
+
+      <system-out><![CDATA[Feature: Logging out
+
+--Output from Log out--
+  Scenario: Log out                                      # Logout.feature:5
+    Given I am at the home page and logged in as "user1" # Logout_steps.groovy:7
+    When I click the logout button                       # Logout_steps.groovy:12
+    Then I should be redirected to the login page        # Logout_steps.groovy:15
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from Log out--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="4" name="Posting new post" package="" tests="1" time="2.562" timestamp="2015-10-14T18:38:57">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.555" />
+
+      <system-out><![CDATA[Feature: Posting new post
+
+--Output from New Post--
+  Scenario: New Post                                                  # NewPost.feature:4
+    Given I am logged in and at the home page                         # NewPost_steps.groovy:4
+    When I write "This is a new post" in the text area and click post # NewPost_steps.groovy:10
+    Then I should see "This is a new post" in the list of posts       # NewPost_steps.groovy:15
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from New Post--]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Poseidon" id="5" name="logging in" package="" tests="1" time="0.769" timestamp="2015-10-14T18:38:56">
+      <properties />
+
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="0.76" />
+
+      <system-out><![CDATA[Feature: logging in
+
+--Output from Logging in--
+  Scenario: Logging in                                                                       # Login.feature:3
+    Given I am at the login page                                                             # Login_steps.groovy:8
+    When I type "user1" in the username field and "password" in the password field and login # Login_steps.groovy:13
+    Then I should be able to see "user1" at the home page                                    # Login_steps.groovy:16
+]]></system-out>
+
+      <system-err><![CDATA[
+--Output from Logging in--]]></system-err>
 
   </testsuite>
 </testsuites>

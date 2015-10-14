@@ -13,6 +13,7 @@ When(~/^I like the post "([^"]*)"$/) { String arg1 ->
     page.like()
 }
 Then(~/^I should see "([^"]*)" on the post$/) { String arg1 ->
+    at HomePage
     page.hasLiked(arg1)
     to LogoutPage
 }

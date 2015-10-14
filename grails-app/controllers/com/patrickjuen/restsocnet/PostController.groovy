@@ -62,8 +62,8 @@ class PostController {
 
     def update() {
         def post = Post.findById(params.id)
-        if (!post.hasErrors()) {
-            def currentUser = User.get(springSecurityService.principal.id)
+        def currentUser = User.get(springSecurityService.principal.id)
+        if (!post.hasErrors() && !currentUser.hasLiked(post)) {
             def notif = new Notification(message: currentUser.toString() + " liked your post (" + post.content + ")")
             post.addToLikers(currentUser)
             post.user.addToNotifications(notif)

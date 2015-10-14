@@ -26,10 +26,12 @@ class HomePage extends Page{
 
     def like(){
 //        $("button", text: content).click()
+        waitFor{ likeBtn4 }
         likeBtn4.click()
     }
 
     def follow(){
+        waitFor{ followBtn1 }
         followBtn1.click()
     }
 
@@ -47,7 +49,7 @@ class HomePage extends Page{
     }
 
     def hasLiked(String content){
-        return $("div", text: contains(content)) != null
+        return waitFor { $("div", text: contains(content)) } != null
     }
 
     def isEmpty(){

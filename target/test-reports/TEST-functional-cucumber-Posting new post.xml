@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Poseidon" name="Posting new post" tests="1" time="2.562" timestamp="2015-10-14T18:38:57">
+  <properties />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.555" />
+  <system-out><![CDATA[Feature: Posting new post
+
+--Output from New Post--
+  Scenario: New Post                                                  # NewPost.feature:4
+    Given I am logged in and at the home page                         # NewPost_steps.groovy:4
+    When I write "This is a new post" in the text area and click post # NewPost_steps.groovy:10
+    Then I should see "This is a new post" in the list of posts       # NewPost_steps.groovy:15
+]]></system-out>
+  <system-err><![CDATA[
+--Output from New Post--]]></system-err>
+</testsuite>

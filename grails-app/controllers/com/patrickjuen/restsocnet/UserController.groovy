@@ -44,9 +44,9 @@ class UserController {
                         'message'       : error.defaultMessage
                 ])
             }
-            render errors as JSON
+            response.status = 500
+            render newUser.errors as JSON
 //            render( newUser.errors .fieldErrors as JSON)
-
         }
     }
 

@@ -1,0 +1,7 @@
+Feature: Like a post
+
+--Output from Like a Post--
+  Scenario: Like a Post                              # LikePost.feature:3
+    Given I am logged in and at the home page        # NewPost_steps.groovy:4
+    When I like the post "i am user2 guys hehehe"    # LikePost_steps.groovy:11
+    Then I should see "user1 liked this" on the post # LikePost_steps.groovy:15
