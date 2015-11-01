@@ -171,13 +171,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
             .state("register", {
                 url: "/register",
                 resolve:{
-                    $title: function(){return "Register"},
-                    User: 'User',
-                    users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
-                        if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
-                            return User.query().$promise
-                        }
-                    }],
+                    $title: function(){return "Register"}
                     //Notification: 'Notification',
                     //notifications: ['Notification', 'store', 'jwtHelper', function(Notification, store, jwtHelper){
                     //    if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
@@ -188,7 +182,15 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'jwtInt
                 views:{
                     navbar:{
                         templateUrl: "partials/navbar.html",
-                        controller: 'NavbarController'
+                        controller: 'NavbarController',
+                        resolve:{
+                            User: 'User',
+                            users: ['User', 'store', 'jwtHelper', function(User, store, jwtHelper){
+                                if(!(!store.get('jwt' || jwtHelper.isTokenExpired(store.get('jwt'))))){
+                                    return User.query().$promise
+                                }
+                            }],
+                        }
                     },
                     content:{
                         templateUrl: "partials/register.html",
@@ -545,6 +547,7 @@ app.controller('LoginController', ['$scope', 'Login', 'store', '$state', functio
                 $state.go('posts')
             }, function (error) {
                 $scope.user = {}
+                //console.log(error)
                 if(error.status === 401){
                     $scope.showError = true
                 }

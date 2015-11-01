@@ -17,5 +17,4 @@ When(~/^I am at the home page$/) { ->
 Then(~/^I should see all the posts$/) { ->
     assert page.isEmpty() == false
     to LogoutPage
-
 }

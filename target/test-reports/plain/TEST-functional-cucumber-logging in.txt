@@ -1,5 +1,5 @@
 Testsuite: logging in
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.769 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 1.073 sec
 ------------- Standard Output ---------------
 Feature: logging in
 
@@ -13,4 +13,4 @@ Feature: logging in
 
 --Output from Logging in--------------- ---------------- ---------------
 
-Testcase: Logging in took 0.76 sec
+Testcase: Logging in took 1.053 sec

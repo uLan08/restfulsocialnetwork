@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="Logging out" tests="1" time="0.367" timestamp="2015-10-14T18:38:57">
+<testsuite errors="0" failures="0" hostname="Shadow" name="Logging out" tests="1" time="0.343" timestamp="2015-10-15T05:09:34">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.358" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.339" />
   <system-out><![CDATA[Feature: Logging out
 
 --Output from Log out--

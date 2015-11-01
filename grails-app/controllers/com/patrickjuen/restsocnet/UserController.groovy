@@ -27,26 +27,13 @@ class UserController {
         def newUser = new User(request.JSON)
         if(newUser.validate()){
             newUser.save()
-            println newUser
             def role = Role.findByAuthority("ROLE_USER")
-            println role
             UserRole.create(newUser, role, true);
             render (["success": true] as JSON)
         }
         else{
-            def results = newUser.errors.fieldErrors.toList()
-            def errors = []
-            for (error in results) {
-                errors.add([
-                        'type'          : 'invalid_entry',
-                        'field'         : error.field,
-                        'rejected_value': error.rejectedValue,
-                        'message'       : error.defaultMessage
-                ])
-            }
             response.status = 500
             render newUser.errors as JSON
-//            render( newUser.errors .fieldErrors as JSON)
         }
     }
 

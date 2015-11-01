@@ -1,5 +1,5 @@
 Testsuite: Logging out
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.367 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.343 sec
 ------------- Standard Output ---------------
 Feature: Logging out
 
@@ -13,4 +13,4 @@ Feature: Logging out
 
 --Output from Log out--------------- ---------------- ---------------
 
-Testcase: Log out took 0.358 sec
+Testcase: Log out took 0.339 sec

@@ -1,5 +1,5 @@
 Testsuite: List Posts
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 1.964 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 1.533 sec
 ------------- Standard Output ---------------
 Feature: List Posts
 
@@ -13,4 +13,4 @@ Feature: List Posts
 
 --Output from See all posts--------------- ---------------- ---------------
 
-Testcase: See all posts took 1.955 sec
+Testcase: See all posts took 1.526 sec

@@ -3,7 +3,7 @@ package pages
 import geb.Page
 
 class HomePage extends Page{
-    static url = "http://localhost:8090/restsocnet/home"
+    static url = "http://localhost:8080/restsocnet/home"
     static at = {
         waitFor {title == "Home"}
     }

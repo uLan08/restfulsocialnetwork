@@ -1,5 +1,5 @@
 Testsuite: Follow a user
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 11.769 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 9.177 sec
 ------------- Standard Output ---------------
 Feature: Follow a user
 
@@ -13,4 +13,4 @@ Feature: Follow a user
 
 --Output from Follow user--------------- ---------------- ---------------
 
-Testcase: Follow user took 7.32 sec
+Testcase: Follow user took 4.405 sec

@@ -45,7 +45,7 @@ class PostController {
         def newPost = new Post(request.JSON)
         if (!newPost.hasErrors()) {
             def currentUser = User.get(springSecurityService.principal.id)
-            println currentUser
+//            println currentUser
             newPost.user = currentUser
             newPost.save(failOnError: true)
 

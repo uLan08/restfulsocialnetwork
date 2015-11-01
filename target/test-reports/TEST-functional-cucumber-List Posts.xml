@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="List Posts" tests="1" time="1.964" timestamp="2015-10-14T18:38:54">
+<testsuite errors="0" failures="0" hostname="Shadow" name="List Posts" tests="1" time="1.533" timestamp="2015-10-15T05:09:31">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="1.955" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="1.526" />
   <system-out><![CDATA[Feature: List Posts
 
 --Output from See all posts--

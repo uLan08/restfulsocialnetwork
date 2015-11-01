@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="Like a post" tests="1" time="2.584" timestamp="2015-10-14T18:38:51">
+<testsuite errors="0" failures="0" hostname="Shadow" name="Like a post" tests="1" time="2.149" timestamp="2015-10-15T05:09:29">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Like a Post" time="2.567" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="Like a Post" time="2.135" />
   <system-out><![CDATA[Feature: Like a post
 
 --Output from Like a Post--

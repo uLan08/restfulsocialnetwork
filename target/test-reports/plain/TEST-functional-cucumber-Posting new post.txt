@@ -1,5 +1,5 @@
 Testsuite: Posting new post
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 2.562 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 2.243 sec
 ------------- Standard Output ---------------
 Feature: Posting new post
 
@@ -13,4 +13,4 @@ Feature: Posting new post
 
 --Output from New Post--------------- ---------------- ---------------
 
-Testcase: New Post took 2.555 sec
+Testcase: New Post took 2.233 sec

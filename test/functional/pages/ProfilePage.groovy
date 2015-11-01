@@ -3,7 +3,7 @@ package pages
 import geb.Page
 
 class ProfilePage extends Page{
-    static url = "http://localhost:8090/restsocnet/profile/2"
+    static url = "http://localhost:8080/restsocnet/profile/2"
 
     static at = {
        waitFor { $("h1").text() == "user2" }

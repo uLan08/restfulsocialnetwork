@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Poseidon" name="Posting new post" tests="1" time="2.562" timestamp="2015-10-14T18:38:57">
+<testsuite errors="0" failures="0" hostname="Shadow" name="Posting new post" tests="1" time="2.243" timestamp="2015-10-15T05:09:34">
   <properties />
-  <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.555" />
+  <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.233" />
   <system-out><![CDATA[Feature: Posting new post
 
 --Output from New Post--

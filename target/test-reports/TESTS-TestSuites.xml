@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="0" name="Follow a user" package="" tests="1" time="11.769" timestamp="2015-10-14T18:38:40">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="0" name="Follow a user" package="" tests="1" time="9.177" timestamp="2015-10-15T05:09:20">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="7.32" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Follow user" time="4.405" />
 
       <system-out><![CDATA[Feature: Follow a user
 
@@ -18,10 +18,10 @@
 --Output from Follow user--]]></system-err>
 
   </testsuite>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="1" name="Like a post" package="" tests="1" time="2.584" timestamp="2015-10-14T18:38:51">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="1" name="Like a post" package="" tests="1" time="2.149" timestamp="2015-10-15T05:09:29">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Like a Post" time="2.567" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Like a Post" time="2.135" />
 
       <system-out><![CDATA[Feature: Like a post
 
@@ -36,10 +36,10 @@
 --Output from Like a Post--]]></system-err>
 
   </testsuite>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="2" name="List Posts" package="" tests="1" time="1.964" timestamp="2015-10-14T18:38:54">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="2" name="List Posts" package="" tests="1" time="1.533" timestamp="2015-10-15T05:09:31">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="1.955" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="See all posts" time="1.526" />
 
       <system-out><![CDATA[Feature: List Posts
 
@@ -54,10 +54,10 @@
 --Output from See all posts--]]></system-err>
 
   </testsuite>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="3" name="Logging out" package="" tests="1" time="0.367" timestamp="2015-10-14T18:38:57">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="3" name="Logging out" package="" tests="1" time="0.343" timestamp="2015-10-15T05:09:34">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.358" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Log out" time="0.339" />
 
       <system-out><![CDATA[Feature: Logging out
 
@@ -72,10 +72,10 @@
 --Output from Log out--]]></system-err>
 
   </testsuite>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="4" name="Posting new post" package="" tests="1" time="2.562" timestamp="2015-10-14T18:38:57">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="4" name="Posting new post" package="" tests="1" time="2.243" timestamp="2015-10-15T05:09:34">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.555" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="New Post" time="2.233" />
 
       <system-out><![CDATA[Feature: Posting new post
 
@@ -90,10 +90,10 @@
 --Output from New Post--]]></system-err>
 
   </testsuite>
-  <testsuite errors="0" failures="0" hostname="Poseidon" id="5" name="logging in" package="" tests="1" time="0.769" timestamp="2015-10-14T18:38:56">
+  <testsuite errors="0" failures="0" hostname="Shadow" id="5" name="logging in" package="" tests="1" time="1.073" timestamp="2015-10-15T05:09:33">
       <properties />
 
-      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="0.76" />
+      <testcase classname="grails.plugin.cucumber.CucumberTest" name="Logging in" time="1.053" />
 
       <system-out><![CDATA[Feature: logging in
 

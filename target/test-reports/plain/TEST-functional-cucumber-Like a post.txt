@@ -1,5 +1,5 @@
 Testsuite: Like a post
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 2.584 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 2.149 sec
 ------------- Standard Output ---------------
 Feature: Like a post
 
@@ -13,4 +13,4 @@ Feature: Like a post
 
 --Output from Like a Post--------------- ---------------- ---------------
 
-Testcase: Like a Post took 2.567 sec
+Testcase: Like a Post took 2.135 sec
